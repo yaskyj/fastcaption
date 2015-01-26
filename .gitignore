@@ -1,3 +1,9 @@
+#Cloud9 files
+/.c9/
+
+#npm modules
+node_modules
+
 # Logs
 logs
 *.log

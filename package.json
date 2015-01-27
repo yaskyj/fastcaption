@@ -1,0 +1,22 @@
+{
+  "name": "nomorecraptions",
+  "version": "0.1.0",
+  "description": "YouTube captioning app",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yaskyj/nomorecraptions"
+  },
+  "keywords": [
+    "caption"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yaskyj/nomorecraptions/issues"
+  },
+  "homepage": "https://github.com/yaskyj/nomorecraptions"
+}

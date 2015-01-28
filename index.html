@@ -7,8 +7,9 @@
 	<!-- Optional theme -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 	<style type="text/css">
-		.quick-space {
-			margin: 10px;
+		/*class for some messy spacing*/
+		.input-space {
+			margin: 150px 0 30px 0;
 			padding: 10px;
 		}
 	</style>
@@ -16,13 +17,13 @@
 <body>
 	<div class="container">
 		<div class="row text-center">
-			<div class="col-lg-12 quick-space">
-				<input id="link-value" type="text" class="input-lg"> <br>
+			<div class="col-lg-12 input-space">
+				<input id="link-value" type="text" class="input-lg form-control"> <br>
 			</div>
 		</div>
 		<div class="row text-center">
-			<div class="col-lg-12 quick-space">
-				<input id="the-button" class="btn btn-primary" type="submit" value="Click For Awesome">
+			<div class="col-lg-12">
+				<input id="the-button" class="btn btn-primary" type="submit" value="Click for the Awesome">
 			</div>
 		</div>
 
@@ -55,21 +56,6 @@
 			});
 		});
 	</script>
-<!-- 
-	<script>
-		angular.module('app', [])
-		.controller('urlController', ['$scope', function($scope) {
-			var re = /=(\w+)$/,
-				tempUrl = $scope.url;
-				testURL = 'https://www.youtube.com/watch?v=fPloDzu_wcI';
-			$scope.urlID = testURL.match(re)[1];				
-
-			$scope.checkRegex = function() {
-				console.log(tempUrl + " " + typeof tempUrl);
-			};			
-		}]);
-	</script>
- -->	
 	<!-- https://www.youtube.com/watch?v=fPloDzu_wcI -->
 </body>
 </html>

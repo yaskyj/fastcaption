@@ -1,14 +1,62 @@
 <!DOCTYPE html>
-<html ng-app>
+<html>
 <head>
 	<title>NoMoreCraptions</title>
 	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 	<!-- Optional theme -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+	<style type="text/css">
+		.quick-space {
+			margin: 10px;
+			padding: 10px;
+		}
+	</style>
 </head>
 <body>
-	<input ng-model="test"> This is a {{test}}
-	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.28/angular.min.js"></script>
+	<div class="container">
+		<div class="row text-center">
+			<div class="col-lg-12 quick-space">
+				<input id="link-value" type="text" class="input-lg"> <br>
+				<input id="the-button" type="submit" value="Click">
+			</div>
+		</div>
+
+		<div class="row text-center">
+			<div class="col-lg-12 quick-space">
+				<div class="for-display">
+				</div>
+				<!-- The video ID is = {{urlID}} -->
+			</div>
+		</div>
+	</div>
+<!-- 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.28/angular.min.js"></script> -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+	<script>
+		$(document).ready(function() {
+			$('#the-button').click(function() {
+				var urlValue = $('#link-value').val(),
+					re = /=(\w+)$/,
+					videoID = urlValue.match(re)[1];
+					$('.for-display').append('This is the video ID ' + videoID); 
+			});
+		});
+	</script>
+<!-- 
+	<script>
+		angular.module('app', [])
+		.controller('urlController', ['$scope', function($scope) {
+			var re = /=(\w+)$/,
+				tempUrl = $scope.url;
+				testURL = 'https://www.youtube.com/watch?v=fPloDzu_wcI';
+			$scope.urlID = testURL.match(re)[1];				
+
+			$scope.checkRegex = function() {
+				console.log(tempUrl + " " + typeof tempUrl);
+			};			
+		}]);
+	</script>
+ -->	
+	<!-- https://www.youtube.com/watch?v=fPloDzu_wcI -->
 </body>
 </html>

@@ -18,7 +18,7 @@
 	<div class="container">
 		<div class="row text-center">
 			<div class="col-lg-12 input-space">
-				<input id="link-value" type="text" class="input-lg form-control"> <br>
+				<input id="link-value" type="text" class="input-lg form-control text-center" placeholder="Paste the YouTube URL or Video ID here"> <br>
 			</div>
 		</div>
 		<div class="row text-center">
@@ -46,9 +46,15 @@
 		$(document).ready(function() {
 			$('#the-button').click(function() {
 				var urlValue = $('#link-value').val(),
-					re = /=(\w+)$/,
-					videoID = urlValue.match(re)[1];
-					$('.for-display').append('This is the video ID ' + videoID);
+				re = /=(\w+)$/,
+				videoID;
+				if (urlValue.length > 11) {
+					videoID = urlValue.match(re)[1].trim();	
+				}
+				else {
+					videoID = urlValue.trim();
+				}
+				$('.for-display').append('This is the video ID ' + videoID);
 /*					var startAPi = '<iframe id="player" type="text/html" width="640" height="390" src="https://www.youtube.com/embed/';
 			  		var endApi = '?enablejsapi=1" frameborder="0"></iframe>';
 			  		var wholeApi = startAPi + videoID + endApi;

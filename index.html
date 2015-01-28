@@ -18,7 +18,11 @@
 		<div class="row text-center">
 			<div class="col-lg-12 quick-space">
 				<input id="link-value" type="text" class="input-lg"> <br>
-				<input id="the-button" type="submit" value="Click">
+			</div>
+		</div>
+		<div class="row text-center">
+			<div class="col-lg-12 quick-space">
+				<input id="the-button" class="btn btn-primary" type="submit" value="Click For Awesome">
 			</div>
 		</div>
 
@@ -26,7 +30,12 @@
 			<div class="col-lg-12 quick-space">
 				<div class="for-display">
 				</div>
-				<!-- The video ID is = {{urlID}} -->
+			</div>
+		</div>
+		<div class="row text-center">
+			<div class="col-lg-12 quick-space">
+				<div id="player">
+				</div>
 			</div>
 		</div>
 	</div>
@@ -38,7 +47,11 @@
 				var urlValue = $('#link-value').val(),
 					re = /=(\w+)$/,
 					videoID = urlValue.match(re)[1];
-					$('.for-display').append('This is the video ID ' + videoID); 
+					$('.for-display').append('This is the video ID ' + videoID);
+/*					var startAPi = '<iframe id="player" type="text/html" width="640" height="390" src="https://www.youtube.com/embed/';
+			  		var endApi = '?enablejsapi=1" frameborder="0"></iframe>';
+			  		var wholeApi = startAPi + videoID + endApi;
+					$('#player').append(wholeApi);*/
 			});
 		});
 	</script>

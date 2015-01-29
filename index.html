@@ -6,6 +6,7 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 	<!-- Optional theme -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+	<link rel="stylesheet" href="mediaelementplayer.css">
 	<style type="text/css">
 		/*class for some messy spacing*/
 		.input-space {
@@ -26,7 +27,12 @@
 				<input id="the-button" class="btn btn-primary" type="submit" value="Click for the Awesome">
 			</div>
 		</div>
-
+		
+		<video width="640" height="360" id="player1" preload="none">
+	    <source type="video/youtube" src="http://www.youtube.com/watch?v=fPloDzu_wcI" />
+	    <h1>Test</h1>
+		</video>
+		
 		<div class="row text-center">
 			<div class="col-lg-12">
 				<div class="for-display">
@@ -42,6 +48,7 @@
 	</div>
 <!-- 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.28/angular.min.js"></script> -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+	<script src="mediaelement-and-player.min.js"></script>
 	<script>
 		$(document).ready(function() {
 			$('#the-button').click(function() {

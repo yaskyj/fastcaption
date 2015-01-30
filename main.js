@@ -75,9 +75,9 @@ $(document).ready(function() {
     else {
       videoID = urlValue.trim();
     }
-    $('.search-bar').fadeOut('slow');
-    $('.main-button').fadeOut('slow');
-    $('.shortcuts').fadeIn('slow');
+    $('.search-bar').hide();
+    $('.main-button').hide();
+    $('.shortcuts').fadeIn();
     tag.src = "https://www.youtube.com/iframe_api";
     firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
   });

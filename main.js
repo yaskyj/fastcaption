@@ -4,14 +4,14 @@ var urlValue,
   tag,
   firstScriptTag,
   player,
-  done = false,
-  pause = {};
+  done = false;
 
 function onYouTubeIframeAPIReady() {
   player = new YT.Player('player', {
     height: '390',
     width: '640',
     videoId: videoID,
+    playerVars: {'cc_load_policy': 1},
     events: {
       'onReady': onPlayerReady,
       'onStateChange': onPlayerStateChange
@@ -24,23 +24,18 @@ function onPlayerReady(event) {
 }
 
 function onPlayerStateChange(event) {
-  // if (event.data == YT.PlayerState.PLAYING && !done) {
-  //   setTimeout(stopVideo, 6000);
-  //   done = true;
-  // }
-}
-
-function stopVideo() {
-  player.stopVideo();
 }
 
 function pauseVideo() {
-  player.pauseVideo();
+  if (player.getPlayerState() === 1) {
+    player.pauseVideo();
+  }
+  else {
+    player.playVideo();
+  }
 }
 
-Mousetrap.bind('shift+space', function(e) {
-  alert('Mousetrap is working!');
-});
+Mousetrap.bind('shift+space', pauseVideo);
 
 $(document).ready(function() {
   $('#the-button').click(function() {
@@ -60,10 +55,5 @@ $(document).ready(function() {
     $('.main-button').hide();
     tag.src = "https://www.youtube.com/iframe_api";
     firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
   });
-
-  if (true) {
-
-  }
 });

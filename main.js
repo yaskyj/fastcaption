@@ -35,6 +35,7 @@ function pauseVideo() {
   }
 }
 
+Mousetrap.bind('ctrl+space', pauseVideo);
 
 $(document).ready(function() {
   $('#the-button').click(function() {
@@ -50,16 +51,11 @@ $(document).ready(function() {
     else {
       videoID = urlValue.trim();
     }
-    $('.search-bar').hide();
-    $('.main-button').hide();
+    $('.search-bar').fadeOut('slow');
+    $('.main-button').fadeOut('slow');
+    $('.shortcuts').fadeIn('slow');
     tag.src = "https://www.youtube.com/iframe_api";
     firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
   });
   
-  Mousetrap.bind('shift+space', pauseVideo);
-
-  Mousetrap.bind('ctrl+space', function(e, combo) {
-    alert('control is working');
-    console.log(combo);
-  });
 });

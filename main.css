@@ -4,6 +4,11 @@
   padding: 10px;
 }
 
+.search-bar {
+  margin: auto;
+  width: 50%;
+}
+
 .video-main {
   margin: 50px;
 }

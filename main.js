@@ -47,8 +47,8 @@ $(document).ready(function() {
     else {
       videoID = urlValue.trim();
     }
-    $('link-value').hide();
-    $('the-button').hide();
+    $('.search-bar').hide();
+    $('.main-button').hide();
     tag.src = "https://www.youtube.com/iframe_api";
     firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 

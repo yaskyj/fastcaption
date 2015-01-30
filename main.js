@@ -4,7 +4,9 @@ var urlValue,
   tag,
   firstScriptTag,
   player,
-  done = false;
+  rates,
+  currentRate,
+  rateIndex;
 
 function onYouTubeIframeAPIReady() {
   player = new YT.Player('player', {
@@ -20,6 +22,12 @@ function onYouTubeIframeAPIReady() {
 }
 
 function onPlayerReady(event) {
+  rates = player.getAvailablePlaybackRates();
+  currentRate = player.getPlaybackRate();
+  rateIndex = rates.indexOf(currentRate);
+  console.log(rates);
+  console.log(currentRate);
+  console.log(rateIndex);
   event.target.playVideo();
 }
 
@@ -35,7 +43,23 @@ function pauseVideo() {
   }
 }
 
+function slowdownVideo() {
+  if (rateIndex > 0) {
+    player.setPlaybackRate(rates[rateIndex-1]);
+    rateIndex -= 1;
+  }
+}
+
+function speedupVideo() {
+  if (rateIndex < rates.length -1) {
+    player.setPlaybackRate(rates[rateIndex+1]);
+    rateIndex += 1;
+  }
+}
+
 Mousetrap.bind('ctrl+space', pauseVideo);
+Mousetrap.bind('ctrl+-', slowdownVideo);
+Mousetrap.bind('ctrl+=', speedupVideo);
 
 $(document).ready(function() {
   $('#the-button').click(function() {

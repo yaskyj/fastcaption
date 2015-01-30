@@ -35,7 +35,6 @@ function pauseVideo() {
   }
 }
 
-Mousetrap.bind('ctrl+space', alert('control is working'));
 
 $(document).ready(function() {
   $('#the-button').click(function() {
@@ -55,5 +54,12 @@ $(document).ready(function() {
     $('.main-button').hide();
     tag.src = "https://www.youtube.com/iframe_api";
     firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+  });
+  
+  Mousetrap.bind('shift+space', pauseVideo);
+
+  Mousetrap.bind('ctrl+space', function(e, combo) {
+    alert('control is working');
+    console.log(combo);
   });
 });

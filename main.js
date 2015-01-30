@@ -4,7 +4,8 @@ var urlValue,
   tag,
   firstScriptTag,
   player,
-  done = false;
+  done = false,
+  pause = {};
 
 function onYouTubeIframeAPIReady() {
   player = new YT.Player('player', {
@@ -33,6 +34,14 @@ function stopVideo() {
   player.stopVideo();
 }
 
+function pauseVideo() {
+  player.pauseVideo();
+}
+
+Mousetrap.bind('shift+space', function(e) {
+  alert('Mousetrap is working!');
+});
+
 $(document).ready(function() {
   $('#the-button').click(function() {
     urlValue = $('#link-value').val();
@@ -53,4 +62,8 @@ $(document).ready(function() {
     firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
   });
+
+  if (true) {
+
+  }
 });

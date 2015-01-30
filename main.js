@@ -35,7 +35,7 @@ function pauseVideo() {
   }
 }
 
-Mousetrap.bind('shift+space', pauseVideo);
+Mousetrap.bind('ctrl+space', pauseVideo);
 
 $(document).ready(function() {
   $('#the-button').click(function() {

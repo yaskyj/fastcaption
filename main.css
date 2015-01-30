@@ -7,3 +7,12 @@
 .video-main {
   margin: 150px;
 }
+
+.shortcuts {
+  width: 60%;
+  margin: 0 auto;
+}
+
+.shortcuts .table {
+  margin-top: 20px;
+}

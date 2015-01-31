@@ -25,9 +25,6 @@ function onPlayerReady(event) {
   rates = player.getAvailablePlaybackRates();
   currentRate = player.getPlaybackRate();
   rateIndex = rates.indexOf(currentRate);
-  console.log(rates);
-  console.log(currentRate);
-  console.log(rateIndex);
   event.target.playVideo();
 }
 

@@ -18,5 +18,8 @@
   "bugs": {
     "url": "https://github.com/yaskyj/nomorecraptions/issues"
   },
-  "homepage": "https://github.com/yaskyj/nomorecraptions"
+  "homepage": "https://github.com/yaskyj/nomorecraptions",
+  "dependencies": {
+    "express": "4.11.x"
+  }
 }

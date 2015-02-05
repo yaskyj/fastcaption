@@ -13,7 +13,10 @@ function onYouTubeIframeAPIReady() {
     height: '390',
     width: '640',
     videoId: videoID,
-    playerVars: {'cc_load_policy': 1},
+    playerVars: {
+      'cc_load_policy': 1,
+      'controls': 0
+    },
     events: {
       'onReady': onPlayerReady,
       'onStateChange': onPlayerStateChange
@@ -75,6 +78,8 @@ $(document).ready(function() {
     $('.search-bar').hide();
     $('.main-button').hide();
     $('.shortcuts').fadeIn();
+    $('#player').show();
+    $('#overlay').show();
     tag.src = "https://www.youtube.com/iframe_api";
     firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
   });

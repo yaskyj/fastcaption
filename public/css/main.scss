@@ -74,11 +74,16 @@ footer {
   width: 50%;
 }
 
+#the-button {
+  margin: 30px auto;  
+}
+
 .video-main {
   margin: 50px auto;
   width: 640px;
   height: 390px;
   position: relative;
+  display: none;
 }
 
 #player, #overlay {
@@ -87,7 +92,7 @@ footer {
   position: absolute;
   top: 0;
   left: 0;
-/*  display: none;*/
+  display: none;
 }
 
 #overlay {
@@ -97,7 +102,7 @@ footer {
 .shortcuts {
   width: 60%;
   margin: 0 auto;
-/*  display: none;*/
+  display: none;
 }
 
 .shortcuts .table {

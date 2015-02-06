@@ -30,6 +30,9 @@ block content
     #player
     #overlay
 
-  .row
-    .col-lg-12
-      textarea#current-subtitle.input-lg.text-center(rows="5", cols="50")
+  .row.text-center
+    .lg-col.12
+      textarea.input-lg(data-ng-model="subtitle", rows="5", cols="50")
+      br
+      br
+      {{subtitle}}

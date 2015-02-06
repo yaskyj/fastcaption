@@ -79,6 +79,7 @@ $(document).ready(function() {
     $('.search-bar').hide();
     $('.main-button').hide();
     $('.shortcuts').fadeIn();
+    $('.video-main').show();
     $('#player').show();
     $('#overlay').show();
     tag.src = "https://www.youtube.com/iframe_api";

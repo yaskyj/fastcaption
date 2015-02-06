@@ -13,6 +13,8 @@
  * scripts down below using //= filename.js notation.
  */
 
+//= require lib/angular.min
 //= require lib/jquery-2.1.3.min
 //= require lib/bootstrap.min
+//= require lib/mousetrap.min
 //= require main

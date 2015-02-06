@@ -1,27 +1,31 @@
 extends layout
 
 block content
-  h1 Hackathon Starter
-  p.lead A boilerplate for Node.js web applications.
-  hr
-  .row
-    .col-sm-6
-      h2 Heading
-      p Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
-      p
-        a.btn.btn-default(href='#', role='button') View details »
-    .col-sm-6
-      h2 Heading
-      p Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
-      p
-        a.btn.btn-default(href='#', role='button') View details »
-    .col-sm-6
-      h2 Heading
-      p Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
-      p
-        a.btn.btn-default(href='#', role='button') View details »
-    .col-sm-6
-      h2 Heading
-      p Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
-      p
-        a.btn.btn-default(href='#', role='button') View details »
+  .shortcuts
+    table.table.table-striped
+      thead
+        tr
+          th Shortcut Keys
+          th Action
+      tbody
+        tr
+          td CTRL and Space
+          td Pause/Resume Video
+        tr
+          td CTRL and -
+          td Slowdown Video
+        tr
+          td CTRL and +
+          td Speedup Video
+
+  .row.text-center.search-bar
+    .col-lg-12.input-space
+      input#link-value.input-lg.form-control.text-center(type="text", placeholder="Paste the Video's URL here")
+
+  .row.text-center.main-button
+    .lg-col-12
+      input#the-button.btn.btn-primary(type="submit", value="Click to Get Video")
+
+  .row.text-center.video-main
+    #player
+    #overlay

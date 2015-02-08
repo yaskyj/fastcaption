@@ -82,6 +82,7 @@ $(document).ready(function() {
     $('.video-main').show();
     $('#player').show();
     $('#overlay').show();
+    $('textarea').show();
     tag.src = "https://www.youtube.com/iframe_api";
     firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
   });

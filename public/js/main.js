@@ -83,8 +83,10 @@ $(document).ready(function() {
     $('#player').show();
     $('#overlay').show();
     $('textarea').show();
+    $('#subtitles').show();
     tag.src = "https://www.youtube.com/iframe_api";
     firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
   });
   //https://www.youtube.com/watch?v=MftOONlDQac
+  //https://www.youtube.com/watch?v=fPloDzu_wcI
 });

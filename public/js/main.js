@@ -57,9 +57,19 @@ function speedupVideo() {
   }
 }
 
+function rewindVideo() {
+  player.seekTo(player.getCurrentTime()-5, false);  
+}
+
+function forwardVideo() {
+  player.seekTo(player.getCurrentTime()+5, false);
+}
+
 Mousetrap.bind('ctrl+space', pauseVideo);
-Mousetrap.bind('ctrl+-', slowdownVideo);
-Mousetrap.bind('ctrl+=', speedupVideo);
+Mousetrap.bind('ctrl+3', slowdownVideo);
+Mousetrap.bind('ctrl+4', speedupVideo);
+Mousetrap.bind('ctrl+1', rewindVideo);
+Mousetrap.bind('ctrl+2', forwardVideo);
 
 $(document).ready(function() {
 

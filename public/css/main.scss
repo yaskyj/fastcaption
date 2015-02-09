@@ -80,8 +80,8 @@ footer {
 
 .video-main {
   margin: 50px auto;
-  width: 640px;
-  height: 390px;
+  width: 800px;
+  height: 450px;
   position: relative;
   display: none;
 }
@@ -96,13 +96,18 @@ footer {
 }
 
 #subtitles {
-  position: absolute;
+  position: relative;
   display: none;
-  text-align: center;
-  background-color: #000;
   color: white;
   z-index: 5;
   top: 66%;
+  margin: 0 auto;
+}
+
+h3 {
+  display: inline;
+  background-color: #000;
+  text-align: center;
 }
 
 #overlay {

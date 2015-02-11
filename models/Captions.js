@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 
-var captionsSchema = new mongoose.Schema({
+var captionSchema = new mongoose.Schema({
   _id: { type: String, unique: true},
   captions: [{
       start: Number,
@@ -10,4 +10,4 @@ var captionsSchema = new mongoose.Schema({
   }]
 });
 
-module.exports = mongoose.model('Captions', captionsSchema);
+module.exports = mongoose.model('Caption', captionSchema);

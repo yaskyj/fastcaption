@@ -1,7 +1,5 @@
-angular.module('CaptionService', []).factory('Caption', ['$http', function($http) {
-  return {
-    get : function() {
-      return $http.get('/captions');
-    }
+angular.module('CaptionService', [])
+  .factory('Caption', ['$http', function($http) {
+    return $http.get('/captions');
   }
 }]);

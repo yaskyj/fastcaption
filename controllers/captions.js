@@ -9,5 +9,9 @@ exports.getCaptions = function(req, res) {
 };
 
 exports.getVideo = function(req, res) {
-    
+    console.log(req);
+    Captions.findOne({_id:req}, function(err, caption) {
+      if (err) console.log(err);
+      res.json(caption)
+    });
 };

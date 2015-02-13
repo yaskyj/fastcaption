@@ -3,36 +3,26 @@ var request = require('request'),
     tempArr,
     data,
     uri,
-    re = /ttsurl":"(.+?)",/i,
+    re = /ttsurl":"(.+?)"/i,
     deURI;
 
-request('https://www.youtube.com/watch?v=fPloDzu_wcI', function(error, response, body) {
+request('https://www.youtube.com/watch?v=I2co-ot8PTQ', function(error, response, body) {
   if (error) {
     // console.log(response);
   }
   if (!error && response.statusCode == 200) {
     uri = body.match(re);
     // console.log(body);
-    console.log('test');
-    console.log(uri[1]);
     deURI = uri[1];
+    deURI = deURI.replace(/\\u0026/g, '&');
+    deURI = deURI.replace(/\\/g, '');
+    deURI = deURI.replace(/%2C/g, ',');
+    deURI = deURI + '&type=track&lang=en&name&kind=asr&fmt=1'
+    console.log(deURI);
     request(deURI, function(error, response, body) {
-      console.log(error);
       console.log(response);
-      console.log('test');
+      console.log(body);
     });
-    // console.log(deURI);
-    // deURI = decodeURI(deURI);
-    // console.log(deURI);
-    // deURI = deURI.replace(/\\/g, '');
-    // console.log(deURI);
-    // data = body.split('&');
-    // for (var i in data) {
-    //   tempArr = data[i].split('=');
-    //   dataObj[tempArr[0]] = tempArr[1];
-    //   console.log(i);
-    //   console.log(tempArr[0] + ' : ' + tempArr[1]);
-    // }
   }
 });
 

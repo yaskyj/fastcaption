@@ -7,3 +7,7 @@ exports.getCaptions = function(req, res) {
         res.json(captions);
     });
 };
+
+exports.getVideo = function(req, res) {
+    
+};

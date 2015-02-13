@@ -111,7 +111,9 @@ app.post('/account/password', passportConf.isAuthenticated, userController.postU
 app.post('/account/delete', passportConf.isAuthenticated, userController.postDeleteAccount);
 app.get('/account/unlink/:provider', passportConf.isAuthenticated, userController.getOauthUnlink);
 app.get('/captions', captionsController.getCaptions);
-app.get('/caption/:videoURL', captionsController.getVideo);
+app.get('/captions/:videoURL', function(req, res) {
+  res.send('videoURL is working for ' + req.param('videoURL'));
+});
 
 /**
  * API examples routes.

@@ -18,7 +18,8 @@
 //= require lib/jquery-2.1.3.min
 //= require lib/bootstrap.min
 //= require lib/mousetrap.min
+//= require main
 //= require controllers/CaptionCtrl
 //= require services/CaptionService
 //= require appRoutes
-//= require main
+//= require app

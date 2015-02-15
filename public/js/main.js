@@ -7,7 +7,8 @@ var urlValue,
   rates,
   currentRate,
   rateIndex,
-  resourceID;
+  resourceID,
+  app;
 
 function onYouTubeIframeAPIReady() {
   player = new YT.Player('player', {
@@ -59,15 +60,15 @@ function speedupVideo() {
 }
 
 function rewindVideo() {
-  // player.seekTo(player.getCurrentTime()-5, false);
-  // player.playVideo();
-  console.log(getCurrentTime());
+  player.seekTo((player.getCurrentTime()-5), true);
+  player.playVideo();
+  console.log(player.getCurrentTime());
 }
 
 function forwardVideo() {
-  // player.seekTo(player.getCurrentTime()+5, false);
-  // player.playVideo();
-  console.log(getCurrentTime());
+  player.seekTo((player.getCurrentTime()+5), true);
+  player.playVideo();
+  console.log(player.getCurrentTime());
 }
 
 Mousetrap.bind('ctrl+space', pauseVideo);
@@ -101,6 +102,7 @@ $(document).ready(function() {
     $('#subtitles').show();
     tag.src = "https://www.youtube.com/iframe_api";
     firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+    console.log(resourceID);
   });
 
   $(document).keydown(function(e) {

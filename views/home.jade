@@ -1,6 +1,7 @@
 extends layout
 
 block content
+  h1 This is to check: {{videoUrl}}
   .shortcuts
     table.table.table-striped
       thead
@@ -26,18 +27,18 @@ block content
 
   .row.text-center.search-bar
     .col-lg-12.input-space
-      input#link-value.input-lg.form-control.text-center(type="text", placeholder="Paste the Video's URL here")
+      input#link-value.input-lg.form-control.text-center(type="text", placeholder="Paste the Video's URL here", data-ng-model="videoUrl")
 
   .row.text-center.main-button
     .lg-col-12
-      input#the-button.btn.btn-primary(type="submit", value="Click to Get Video")
+      input#the-button.btn.btn-primary(type="submit", value="Click to Get Video", data-ng-click="onSearch()")
 
   .row.text-center.video-main
     #player
     #overlay
     #subtitles 
       h3 
-        span.subs {{tagline}}
+        span.subs {{subtitle}}
   .row.text-center
     .lg-col.12
       textarea.input-lg.mousetrap(data-ng-model="subtitle", rows="5", cols="50")

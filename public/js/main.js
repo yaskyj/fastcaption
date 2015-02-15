@@ -102,7 +102,6 @@ $(document).ready(function() {
     $('#subtitles').show();
     tag.src = "https://www.youtube.com/iframe_api";
     firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-    console.log(resourceID);
   });
 
   $(document).keydown(function(e) {

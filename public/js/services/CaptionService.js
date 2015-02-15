@@ -1,5 +1,9 @@
 angular.module('CaptionService', [])
   .factory('Caption', ['$http', function($http) {
-    return $http.get('/captions');
-  }
-}]);
+    return {
+      get : function(id) {
+        return $http.get('/captions/' + id);
+      }
+    }
+  }]
+);

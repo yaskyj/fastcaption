@@ -1,7 +1,6 @@
 var request = require('request'),
     uriMatch,
     re = /ttsurl":"(.+?)"/i,
-    reTitle = /<title>(.+) - YouTube</i,
     asrURI;
 
 request('https://www.youtube.com/watch?v=I2co-ot8PTQ', function(error, response, body) {
@@ -13,13 +12,13 @@ request('https://www.youtube.com/watch?v=I2co-ot8PTQ', function(error, response,
     // console.log(body);
     asrURI = uriMatch[1];
     console.log(asrURI);
-    // asrURI = asrURI.replace(/\\u0026/g, '&');
-    // asrURI = asrURI.replace(/\\/g, '');
-    // asrURI = asrURI.replace(/%2C/g, ',');
-    // asrURI = asrURI + '&type=track&lang=en&name&kind=asr&fmt=1'
-    // request(asrURI, function(error, response, body) {
-    //   console.log(body);
-    // });
+    asrURI = asrURI.replace(/\\u0026/g, '&');
+    asrURI = asrURI.replace(/\\/g, '');
+    asrURI = asrURI.replace(/%2C/g, ',');
+    asrURI = asrURI + '&type=track&lang=en&name&kind=asr&fmt=1'
+    request(asrURI, function(error, response, body) {
+      console.log(body);
+    });
   }
 });
 

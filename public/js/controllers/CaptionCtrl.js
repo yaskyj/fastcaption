@@ -1,3 +1,3 @@
-angular.module('CaptionCtrl', []).controller('MainController', function($scope) {
+angular.module('CaptionCtrl', []).controller('CaptionController', function($scope) {
   $scope.tagline = 'This is the test';
 });

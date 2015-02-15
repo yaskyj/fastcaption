@@ -5,5 +5,4 @@ angular.module('CaptionService', [])
         return $http.get('/captions/' + id);
       }
     }
-  }]
-);
+  }]);

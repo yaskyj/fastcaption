@@ -12,6 +12,6 @@ exports.getVideo = function(req, res) {
     console.log(req);
     Captions.findById(req.params.id, function(err, caption) {
       if (err) console.log(err);
-      res.json(caption)
+      res.json(caption.captions);
     });
 };

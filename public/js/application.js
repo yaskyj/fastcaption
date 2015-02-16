@@ -20,6 +20,5 @@
 //= require lib/mousetrap.min
 //= require main
 //= require controllers/CaptionCtrl
-//= require services/CaptionService
 //= require appRoutes
 //= require app

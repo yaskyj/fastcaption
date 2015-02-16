@@ -2,7 +2,7 @@ var re = /=(\w+)/,
     data,
     id;
 angular.module('CaptionCtrl', [])
-  .controller('CaptionController', ['$scope', '$http', 'Caption', function($scope, $http, Caption) {
+  .controller('CaptionController', ['$scope', '$http', function($scope, $http) {
       $scope.onSearch = function() {
         id = $scope.videoUrl.match(re);
         $scope.resourceID = 'youtube' + id[1];

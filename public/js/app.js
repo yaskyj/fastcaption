@@ -1,1 +1,1 @@
-angular.module('nomorecraptions', ['ngRoute', 'appRoutes', 'CaptionCtrl', 'CaptionService']);
+angular.module('nomorecraptions', ['ngRoute', 'appRoutes', 'CaptionCtrl']);

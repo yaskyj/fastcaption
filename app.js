@@ -111,7 +111,8 @@ app.post('/account/password', passportConf.isAuthenticated, userController.postU
 app.post('/account/delete', passportConf.isAuthenticated, userController.postDeleteAccount);
 app.get('/account/unlink/:provider', passportConf.isAuthenticated, userController.getOauthUnlink);
 app.get('/captions', captionsController.getCaptions);
-app.get('/captions/:id', captionsController.getVideo);
+app.get('/caption/:id', captionsController.getCaption);
+app.get('/title/:id', captionsController.getTitle);
 
 /**
  * API examples routes.

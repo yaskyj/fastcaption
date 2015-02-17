@@ -12,6 +12,26 @@ exports.getVideo = function(req, res) {
     console.log(req);
     Captions.findById(req.params.id, function(err, caption) {
       if (err) console.log(err);
-      res.json(caption.captions);
+      res.json(caption)
+    });
+};
+
+exports.getCaption = function(req, res) {
+    Captions.findById(req.params.id, function(err, caption) {
+      if (err) console.log(err);
+
+      if (caption) {
+          res.json(caption.captions);
+      }
+      else {
+        console.log('this');
+      }
+    });
+};
+
+exports.getTitle = function(req, res) {
+    Captions.findById(req.params.id, function(err, caption) {
+      if (err) console.log(err);
+      res.json(caption.title)
     });
 };

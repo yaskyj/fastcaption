@@ -76,9 +76,7 @@ Mousetrap.bind('ctrl+5', speedupVideo);
 Mousetrap.bind('ctrl+2', rewindVideo);
 Mousetrap.bind('ctrl+3', forwardVideo);
 
-$(document).ready(function() {
-  $('#youtube1').mediaelementplayer();
-  
+$(document).ready(function() {  
   $('#the-button').click(function() {
     urlValue = $('#link-value').val();
     tag = document.createElement('script');

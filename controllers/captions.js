@@ -17,13 +17,14 @@ exports.getVideo = function(req, res) {
 };
 
 exports.getCaption = function(req, res) {
-    Captions.findById(req.params.id, function(err, caption) {
+    Captions.find({_id: req.params.id}, function(err, caption) {
       if (err) console.log(err);
 
-      if (caption) {
+      if (caption.length) {
           res.json(caption.captions);
       }
       else {
+        res.send('this is the error')
         console.log('this');
       }
     });

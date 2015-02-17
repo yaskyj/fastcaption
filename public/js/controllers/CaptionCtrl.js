@@ -9,8 +9,7 @@ angular.module('CaptionCtrl', [])
         $http.get('/caption/' + $scope.resourceID)
             .success(function(data) {
               console.log(data);
-              // $scope.title = data.title;
-              // $scope.captions = data.captions;
+              $scope.captions = data.captions;
               // console.log($scope.title);
               // console.log($scope.captions);
             })

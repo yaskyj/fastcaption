@@ -34,6 +34,7 @@ function onPlayerReady(event) {
   currentRate = player.getPlaybackRate();
   rateIndex = rates.indexOf(currentRate);
   event.target.playVideo();
+  subtitleChangeInterval = setInterval(subtitleRefresh, 50);
 }
 
 function onPlayerStateChange(event) {
@@ -80,10 +81,11 @@ Mousetrap.bind('ctrl+5', speedupVideo);
 Mousetrap.bind('ctrl+2', rewindVideo);
 Mousetrap.bind('ctrl+3', forwardVideo);
 
-function subtitleRefresh(subtitles, player) {
+function subtitleRefresh() {
   for (sub in subtitles) {
     var timeStart = subtitles[sub].start,
         timeEnd = subtitles[sub].start + subtitles[sub].dur;
+    console.log(player.getCurrentTime());
     if (player.getCurrentTime() >= timeStart && player.getCurrentTime() <= timeEnd) {
       console.log(timeStart);
       console.log(timeEnd);
@@ -107,19 +109,23 @@ $(document).ready(function() {
     else {
       videoID = urlValue.trim();
     }
-    subtitles = '/caption/youtube' + videoID;
-    console.log(subtitles); 
-    $('.search-bar').hide();
-    $('.main-button').hide();
-    $('.shortcuts').fadeIn();
-    $('.video-main').show();
-    $('#player').show();
-    $('#overlay').show();
-    $('textarea').show();
-    $('#subtitles').show();
-    tag.src = "https://www.youtube.com/iframe_api";
-    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-    setInterval(subtitleRefresh, 50);
+    $.getJSON('/caption/youtube' + videoID, function(data) {
+      subtitles = data;
+      console.log(subtitles[0].start)
+      for (sub in subtitles) {
+        console.log(subtitles[sub].value);
+      }
+      $('.search-bar').hide();
+      $('.main-button').hide();
+      $('.shortcuts').fadeIn();
+      $('.video-main').show();
+      $('#player').show();
+      $('#overlay').show();
+      $('textarea').show();
+      $('#subtitles').show();
+      tag.src = "https://www.youtube.com/iframe_api";
+      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+    });
   });
 
   //https://www.youtube.com/watch?v=MftOONlDQac

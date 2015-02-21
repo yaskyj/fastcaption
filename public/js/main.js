@@ -8,7 +8,10 @@ var urlValue,
   currentRate,
   rateIndex,
   app,
-  popcornVideo;
+  popcornVideo,
+  subtitles,
+  sub,
+  subtitleChangeInterval;
 
 function onYouTubeIframeAPIReady() {
   player = new YT.Player('player', {
@@ -77,6 +80,20 @@ Mousetrap.bind('ctrl+5', speedupVideo);
 Mousetrap.bind('ctrl+2', rewindVideo);
 Mousetrap.bind('ctrl+3', forwardVideo);
 
+function subtitleRefresh(subtitles, player) {
+  for (sub in subtitles) {
+    var timeStart = subtitles[sub].start,
+        timeEnd = subtitles[sub].start + subtitles[sub].dur;
+    if (player.getCurrentTime() >= timeStart && player.getCurrentTime() <= timeEnd) {
+      console.log(timeStart);
+      console.log(timeEnd);
+      console.log(subtitles[sub].value)
+      $('textarea').val(subtitles[sub].value);
+      return false;
+    }
+  }
+}
+
 $(document).ready(function() {
 
   $('#the-button').click(function() {
@@ -90,6 +107,8 @@ $(document).ready(function() {
     else {
       videoID = urlValue.trim();
     }
+    subtitles = '/caption/youtube' + videoID;
+    console.log(subtitles); 
     $('.search-bar').hide();
     $('.main-button').hide();
     $('.shortcuts').fadeIn();
@@ -100,6 +119,7 @@ $(document).ready(function() {
     $('#subtitles').show();
     tag.src = "https://www.youtube.com/iframe_api";
     firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+    setInterval(subtitleRefresh, 50);
   });
 
   //https://www.youtube.com/watch?v=MftOONlDQac

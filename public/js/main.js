@@ -35,6 +35,15 @@ function onPlayerReady(event) {
   rateIndex = rates.indexOf(currentRate);
   event.target.playVideo();
   subtitleChangeInterval = setInterval(subtitleRefresh, 100);
+  
+  $('.sub-edit').focus(function() {
+    player.pauseVideo();
+    clearInterval(subtitleChangeInterval);
+  });
+  $('.sub-edit').focusout(function() {
+    player.playVideo();
+    subtitleChangeInterval = setInterval(subtitleRefresh, 100);
+  });
 }
 
 function onPlayerStateChange(event) {
@@ -89,6 +98,7 @@ function subtitleRefresh() {
       $('.sub-edit').val(subtitles[sub].value);
       $('.sub-prev').val(subtitles[parseInt(sub)-1].value);
       $('.sub-next').val(subtitles[parseInt(sub)+1].value);
+      console.log(document.activeElement);
       console.log(subtitles[parseInt(sub)-1]);
       console.log(subtitles[sub]);
       console.log(subtitles[parseInt(sub)+1]);
@@ -96,6 +106,18 @@ function subtitleRefresh() {
       console.log(parseInt(sub)+1);
       return false;
     }
+  }
+}
+
+function subRefHandling() {
+  if ($('.sub-edit') == document.activeElement) {
+    player.pauseVideo();
+    clearInterval(subtitleChangeInterval);
+
+  }
+  else {
+    player.playVideo();
+    subtitleChangeInterval = setInterval(subtitleRefresh, 100);
   }
 }
 

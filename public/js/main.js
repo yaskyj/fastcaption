@@ -79,13 +79,6 @@ Mousetrap.bind('ctrl+3', forwardVideo);
 
 $(document).ready(function() {
 
-  popcornVideo = Popcorn.HTMLYouTubeVideoElement('#video');
-
-  popcornVideo.src = 'https://www.youtube.com/watch?v=fPloDzu_wcI';
-
-  var pop = Popcorn(popcornVideo);
-  // pop.play();
-
   $('#the-button').click(function() {
     urlValue = $('#link-value').val();
     tag = document.createElement('script');

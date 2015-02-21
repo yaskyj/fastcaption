@@ -7,11 +7,12 @@ var urlValue,
   rates,
   currentRate,
   rateIndex,
-  app,
   popcornVideo,
   subtitles,
   sub,
-  subtitleChangeInterval;
+  subtitleChangeInterval,
+  timeStart,
+  timeEnd;
 
 function onYouTubeIframeAPIReady() {
   player = new YT.Player('player', {
@@ -92,18 +93,12 @@ Mousetrap.bind('ctrl+3', forwardVideo);
 
 function subtitleRefresh() {
   for (sub in subtitles) {
-    var timeStart = subtitles[sub].start,
-        timeEnd = subtitles[sub].start + subtitles[sub].dur;
+    timeStart = subtitles[sub].start,
+    timeEnd = subtitles[sub].start + subtitles[sub].dur;
     if (player.getCurrentTime() >= timeStart && player.getCurrentTime() <= timeEnd) {
       $('.sub-edit').val(subtitles[sub].value);
       $('.sub-prev').val(subtitles[parseInt(sub)-1].value);
       $('.sub-next').val(subtitles[parseInt(sub)+1].value);
-      console.log(document.activeElement);
-      console.log(subtitles[parseInt(sub)-1]);
-      console.log(subtitles[sub]);
-      console.log(subtitles[parseInt(sub)+1]);
-      console.log(sub);
-      console.log(parseInt(sub)+1);
       return false;
     }
   }

@@ -125,9 +125,29 @@ h3 {
 }
 
 .shortcuts .table {
-  margin-top: 20px;
+  margin-top: 10px;
 }
 
-textarea {
+.sub-prev {
+  margin: 50px auto;
   display: none;
+  padding-left: 0px;
+  padding-right: 0px;
+  width: 100%;
+}
+
+.sub-edit {
+  margin: 20px auto;
+  display: none;
+  padding-left: 0px;
+  padding-right: 0px;
+  width: 100%;
+}
+
+.sub-next {
+  margin: 20px auto;
+  display: none;
+  padding-left: 0px;
+  padding-right: 0px;
+  width: 100%;
 }

@@ -35,12 +35,18 @@ block content
     .lg-col-12
       input#the-button.btn.btn-primary(type="submit", value="Click to Get Video", data-ng-click="onSearch()")
 
-  .row.text-center.video-main
-    #player
-    #overlay
-    #subtitles 
-      h3 
-        span.subs {{subtitle}}
-  .row.text-center
-    .lg-col.12
-      textarea.input-lg.mousetrap(data-ng-model="subtitle", rows="5", cols="50")
+  .row
+    .col-lg-9
+      .text-center.video-main
+        #player
+        #overlay
+        #subtitles 
+          h3 
+            span.subs {{subtitle}}
+    .col-lg-3
+      .text-center
+        textarea.input-lg.mousetrap.sub-prev(data-ng-model="subtitle", rows="5", cols="50", readonly="readonly")
+      .text-center
+        textarea.input-lg.mousetrap.sub-edit(data-ng-model="subtitle", rows="5", cols="50")
+      .text-center
+        textarea.input-lg.mousetrap.sub-next(data-ng-model="subtitle", rows="5", cols="50", readonly="readonly")

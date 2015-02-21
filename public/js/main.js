@@ -15,8 +15,8 @@ var urlValue,
 
 function onYouTubeIframeAPIReady() {
   player = new YT.Player('player', {
-    height: '390',
-    width: '640',
+    height: '340',
+    width: '560',
     videoId: videoID,
     playerVars: {
       'cc_load_policy': 1,
@@ -34,7 +34,7 @@ function onPlayerReady(event) {
   currentRate = player.getPlaybackRate();
   rateIndex = rates.indexOf(currentRate);
   event.target.playVideo();
-  subtitleChangeInterval = setInterval(subtitleRefresh, 50);
+  subtitleChangeInterval = setInterval(subtitleRefresh, 100);
 }
 
 function onPlayerStateChange(event) {
@@ -85,12 +85,15 @@ function subtitleRefresh() {
   for (sub in subtitles) {
     var timeStart = subtitles[sub].start,
         timeEnd = subtitles[sub].start + subtitles[sub].dur;
-    console.log(player.getCurrentTime());
     if (player.getCurrentTime() >= timeStart && player.getCurrentTime() <= timeEnd) {
-      console.log(timeStart);
-      console.log(timeEnd);
-      console.log(subtitles[sub].value)
-      $('textarea').val(subtitles[sub].value);
+      $('.sub-edit').val(subtitles[sub].value);
+      $('.sub-prev').val(subtitles[parseInt(sub)-1].value);
+      $('.sub-next').val(subtitles[parseInt(sub)+1].value);
+      console.log(subtitles[parseInt(sub)-1]);
+      console.log(subtitles[sub]);
+      console.log(subtitles[parseInt(sub)+1]);
+      console.log(sub);
+      console.log(parseInt(sub)+1);
       return false;
     }
   }
@@ -111,17 +114,15 @@ $(document).ready(function() {
     }
     $.getJSON('/caption/youtube' + videoID, function(data) {
       subtitles = data;
-      console.log(subtitles[0].start)
-      for (sub in subtitles) {
-        console.log(subtitles[sub].value);
-      }
       $('.search-bar').hide();
       $('.main-button').hide();
       $('.shortcuts').fadeIn();
       $('.video-main').show();
       $('#player').show();
       $('#overlay').show();
-      $('textarea').show();
+      $('.sub-prev').show();
+      $('.sub-edit').show();
+      $('.sub-next').show();
       $('#subtitles').show();
       tag.src = "https://www.youtube.com/iframe_api";
       firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);

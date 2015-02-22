@@ -12,7 +12,10 @@ var urlValue,
   sub,
   subtitleChangeInterval,
   timeStart,
-  timeEnd;
+  timeEnd,
+  prevSub,
+  nextSub,
+  editSub;
 
 function onYouTubeIframeAPIReady() {
   player = new YT.Player('player', {
@@ -95,10 +98,21 @@ function subtitleRefresh() {
   for (sub in subtitles) {
     timeStart = subtitles[sub].start,
     timeEnd = subtitles[sub].start + subtitles[sub].dur;
+    if (player.getCurrentTime() < subtitles[0].start) {
+      editSub = subtitles[0].value;
+      nextSub = subtitles[1].value;      
+      $('.sub-edit').val(editSub);
+      $('.sub-next').val(nextSub);
+      return false;
+    }
+
     if (player.getCurrentTime() >= timeStart && player.getCurrentTime() <= timeEnd) {
-      $('.sub-edit').val(subtitles[sub].value);
-      $('.sub-prev').val(subtitles[parseInt(sub)-1].value);
-      $('.sub-next').val(subtitles[parseInt(sub)+1].value);
+      editSub = subtitles[sub].value;
+      prevSub = subtitles[parseInt(sub)-1].value;
+      nextSub = subtitles[parseInt(sub)+1].value;
+      $('.sub-edit').val(editSub);
+      $('.sub-next').val(nextSub);
+      $('.sub-prev').val(prevSub);
       return false;
     }
   }

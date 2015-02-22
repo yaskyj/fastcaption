@@ -88,31 +88,36 @@ function forwardVideo() {
   console.log(player.getCurrentTime());
 }
 
+function saveSubtitle() {
+
+}
+
 Mousetrap.bind('ctrl+1', pauseVideo);
 Mousetrap.bind('ctrl+4', slowdownVideo);
 Mousetrap.bind('ctrl+5', speedupVideo);
 Mousetrap.bind('ctrl+2', rewindVideo);
 Mousetrap.bind('ctrl+3', forwardVideo);
+Mousetrap.bind('ctrl+enter', saveSubtitle);
 
 function subtitleRefresh() {
   for (sub in subtitles) {
     timeStart = subtitles[sub].start,
     timeEnd = subtitles[sub].start + subtitles[sub].dur;
     if (player.getCurrentTime() < subtitles[0].start) {
-      editSub = subtitles[0].value;
-      nextSub = subtitles[1].value;      
-      $('.sub-edit').val(editSub);
-      $('.sub-next').val(nextSub);
+      editSub = subtitles[0];
+      nextSub = subtitles[1];      
+      $('.sub-edit').val(editSub.value);
+      $('.sub-next').val(nextSub.value);
       return false;
     }
 
     if (player.getCurrentTime() >= timeStart && player.getCurrentTime() <= timeEnd) {
-      editSub = subtitles[sub].value;
-      prevSub = subtitles[parseInt(sub)-1].value;
-      nextSub = subtitles[parseInt(sub)+1].value;
-      $('.sub-edit').val(editSub);
-      $('.sub-next').val(nextSub);
-      $('.sub-prev').val(prevSub);
+      editSub = subtitles[sub];
+      prevSub = subtitles[parseInt(sub)-1];
+      nextSub = subtitles[parseInt(sub)+1];
+      $('.sub-edit').val(editSub.value);
+      $('.sub-next').val(nextSub.value);
+      $('.sub-prev').val(prevSub.value);
       return false;
     }
   }

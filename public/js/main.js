@@ -15,7 +15,8 @@ var urlValue,
   timeEnd,
   prevSub,
   nextSub,
-  editSub;
+  editSub,
+  videoData;
 
 function onYouTubeIframeAPIReady() {
   player = new YT.Player('player', {
@@ -148,8 +149,9 @@ $(document).ready(function() {
     else {
       videoID = urlValue.trim();
     }
-    $.getJSON('/caption/youtube' + videoID, function(data) {
-      subtitles = data;
+    $.getJSON('/video/youtube' + videoID, function(data) {
+      videoData = data
+      subtitles = videoData.captions;
       $('.search-bar').hide();
       $('.main-button').hide();
       $('.shortcuts').fadeIn();
@@ -160,6 +162,9 @@ $(document).ready(function() {
       $('.sub-edit').show();
       $('.sub-next').show();
       $('#subtitles').show();
+      $('.prev-head').show();
+      $('.edit-head').show();
+      $('.next-head').show();      
       tag.src = "https://www.youtube.com/iframe_api";
       firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
     });

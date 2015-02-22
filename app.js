@@ -113,6 +113,7 @@ app.get('/account/unlink/:provider', passportConf.isAuthenticated, userControlle
 app.get('/captions', captionsController.getCaptions);
 app.get('/caption/:id', captionsController.getCaption);
 app.get('/title/:id', captionsController.getTitle);
+app.get('/video/:id', captionsController.getVideo);
 
 /**
  * API examples routes.

@@ -16,7 +16,8 @@ var urlValue,
   prevSub,
   nextSub,
   editSub,
-  videoData;
+  videoData,
+  currentSubIndex;
 
 function onYouTubeIframeAPIReady() {
   player = new YT.Player('player', {
@@ -98,13 +99,14 @@ Mousetrap.bind('ctrl+4', slowdownVideo);
 Mousetrap.bind('ctrl+5', speedupVideo);
 Mousetrap.bind('ctrl+2', rewindVideo);
 Mousetrap.bind('ctrl+3', forwardVideo);
-Mousetrap.bind('ctrl+enter', saveSubtitle);
+Mousetrap.bind('ctrl+shift+s', saveCaption);
 
 function subtitleRefresh() {
   for (sub in subtitles) {
     timeStart = subtitles[sub].start,
     timeEnd = subtitles[sub].start + subtitles[sub].dur;
     if (player.getCurrentTime() < subtitles[0].start) {
+      currentSubIndex = sub;
       editSub = subtitles[0];
       nextSub = subtitles[1];      
       $('.sub-edit').val(editSub.value);
@@ -113,6 +115,7 @@ function subtitleRefresh() {
     }
 
     if (player.getCurrentTime() >= timeStart && player.getCurrentTime() <= timeEnd) {
+      currentSubIndex = sub;
       editSub = subtitles[sub];
       prevSub = subtitles[parseInt(sub)-1];
       nextSub = subtitles[parseInt(sub)+1];
@@ -136,6 +139,11 @@ function subRefHandling() {
   }
 }
 
+function saveCaption() {
+  console.log(currentSubIndex);
+  videoData.captions[currentSubIndex] = $('.sub-edit').val();
+  console.log(videoData);
+}
 $(document).ready(function() {
 
   $('#the-button').click(function() {

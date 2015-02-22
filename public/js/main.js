@@ -90,16 +90,13 @@ function forwardVideo() {
   console.log(player.getCurrentTime());
 }
 
-function saveSubtitle() {
-
-}
-
 Mousetrap.bind('ctrl+1', pauseVideo);
 Mousetrap.bind('ctrl+4', slowdownVideo);
 Mousetrap.bind('ctrl+5', speedupVideo);
 Mousetrap.bind('ctrl+2', rewindVideo);
 Mousetrap.bind('ctrl+3', forwardVideo);
 Mousetrap.bind('ctrl+shift+s', saveCaption);
+Mousetrap.bind('ctrl+shift+q', startCaptionTime);
 
 function subtitleRefresh() {
   for (sub in subtitles) {
@@ -141,9 +138,18 @@ function subRefHandling() {
 
 function saveCaption() {
   console.log(currentSubIndex);
-  videoData.captions[currentSubIndex] = $('.sub-edit').val();
+  videoData.captions[currentSubIndex].value = $('.sub-edit').val();
   console.log(videoData);
+  $('.sub-edit').focusout(function() {
+    player.playVideo();
+    subtitleChangeInterval = setInterval(subtitleRefresh, 100);
+  });  
 }
+
+function startCaptionTime() {
+  console.log(player.getCurrentTime());
+}
+
 $(document).ready(function() {
 
   $('#the-button').click(function() {

@@ -19,7 +19,7 @@ html {
 }
 
 body {
-  padding-top: 60px;
+  padding-top: 20px;
   margin-bottom: 75px;
   -webkit-font-smoothing: antialiased;
 }
@@ -104,11 +104,7 @@ footer {
   margin: 0 auto;
 }
 
-#test-subs {
-  margin: 0 auto;
-}
-
-h3 {
+subtitles h3 {
   display: inline;
   background-color: #000;
   text-align: center;
@@ -119,13 +115,13 @@ h3 {
 }
 
 .shortcuts {
-  width: 60%;
+  width: 100%;
   margin: 0 auto;
   display: none;
 }
 
 .shortcuts .table {
-  margin-top: 10px;
+  margin-top: 0px;
 }
 
 .sub-prev, .sub-edit, .sub-next {

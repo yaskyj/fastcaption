@@ -1,31 +1,41 @@
 extends layout
 
 block content
-  //h1 This is to check: {{title}}
-  //input(type="submit", value="Whatevs", data-ng-click="testLog()")
-
-  .shortcuts
-    table.table.table-striped
-      thead
-        tr
-          th Shortcut Keys
-          th Action
-      tbody
-        tr
-          td CTRL + 1
-          td Pause/Resume Video
-        tr
-          td CTRL + 2
-          td Skip back 5 seconds
-        tr
-          td CTRL + 3
-          td Skip forward 5 seconds
-        tr
-          td CTRL + 4
-          td Slowdown Video
-        tr
-          td CTRL + 5
-          td Speedup Video
+  .row
+    .col-lg-6
+      .shortcuts
+        table.table.table-striped
+          thead
+            tr
+              th Shortcut Keys
+              th Action
+          tbody
+            tr
+              td CTRL + 1
+              td Pause/Resume Video
+            tr
+              td CTRL + 2
+              td Skip back 5 seconds
+            tr
+              td CTRL + 3
+              td Skip forward 5 seconds
+    .col-lg-6
+      .shortcuts
+        table.table.table-striped
+          thead
+            tr
+              th Shortcut Keys
+              th Action
+          tbody
+            tr
+              td CTRL + 4
+              td Slowdown Video
+            tr
+              td CTRL + 5
+              td Speedup Video
+            tr
+              td CTRL + Shift + S
+              td Save Current Caption
 
   .row.text-center.search-bar
     .col-lg-12.input-space

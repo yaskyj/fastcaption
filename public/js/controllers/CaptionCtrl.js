@@ -1,4 +1,4 @@
-var re = /=(\w+)/,
+var re = /=(.+)/,
     data,
     id;
 angular.module('CaptionCtrl', [])

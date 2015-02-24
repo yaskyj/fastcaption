@@ -1,5 +1,5 @@
 var urlValue,
-  re = /=(\w+)/,
+  re = /=(.+)/,
   videoID = '',
   tag,
   firstScriptTag,

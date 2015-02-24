@@ -2,8 +2,11 @@ var _ = require('lodash'),
     Captions = require('../models/Captions'),
     request = require('request'),
     uriMatch,
-    re = /ttsurl":"(.+?)"/i,
-    asrURI;
+    reASR = /ttsurl":"(.+?)"/i,
+    reVidID = /youtube(.+)/i,
+    asrURI,
+    videoID,
+    videoURL;
 
 exports.getCaptions = function(req, res) {
     Captions.find(function(err, captions) {
@@ -13,7 +16,6 @@ exports.getCaptions = function(req, res) {
 };
 
 exports.getVideo = function(req, res) {
-    console.log(req);
     Captions.findById(req.params.id, function(err, caption) {
       if (err) console.log(err);
 
@@ -21,15 +23,18 @@ exports.getVideo = function(req, res) {
         res.json(caption);
       }
       else {
-        request('https://www.youtube.com/watch?v=I2co-ot8PTQ', function(error, response, body) {
+        videoID = req.params.id.match(reVidID)[1];
+        console.log(videoID);
+        videoURL = 'https://www.youtube.com/watch?v=' + videoID 
+        request(videoURL, function(error, response, body) {
           if (error) {
             // console.log(response);
           }
           if (!error && response.statusCode == 200) {
-            uriMatch = body.match(re);
+            uriMatch = body.match(reASR);
             // console.log(body);
             asrURI = uriMatch[1];
-            console.log(asrURI);
+            // console.log(asrURI);
             asrURI = asrURI.replace(/\\u0026/g, '&');
             asrURI = asrURI.replace(/\\/g, '');
             asrURI = asrURI.replace(/%2C/g, ',');

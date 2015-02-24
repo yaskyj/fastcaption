@@ -1,5 +1,9 @@
 var _ = require('lodash'),
-    Captions = require('../models/Captions');
+    Captions = require('../models/Captions'),
+    request = require('request'),
+    uriMatch,
+    re = /ttsurl":"(.+?)"/i,
+    asrURI;
 
 exports.getCaptions = function(req, res) {
     Captions.find(function(err, captions) {
@@ -12,7 +16,31 @@ exports.getVideo = function(req, res) {
     console.log(req);
     Captions.findById(req.params.id, function(err, caption) {
       if (err) console.log(err);
-      res.json(caption)
+
+      if (caption) {
+        res.json(caption);
+      }
+      else {
+        request('https://www.youtube.com/watch?v=I2co-ot8PTQ', function(error, response, body) {
+          if (error) {
+            // console.log(response);
+          }
+          if (!error && response.statusCode == 200) {
+            uriMatch = body.match(re);
+            // console.log(body);
+            asrURI = uriMatch[1];
+            console.log(asrURI);
+            asrURI = asrURI.replace(/\\u0026/g, '&');
+            asrURI = asrURI.replace(/\\/g, '');
+            asrURI = asrURI.replace(/%2C/g, ',');
+            asrURI = asrURI + '&type=track&lang=en&name&kind=asr&fmt=1'
+            console.log(asrURI);
+            request(asrURI, function(error, response, body) {
+              console.log(body);
+            });
+          }
+        });        
+      }
     });
 };
 

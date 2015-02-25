@@ -105,7 +105,7 @@ function subtitleRefresh() {
     if (player.getCurrentTime() < subtitles[0].start) {
       currentSubIndex = sub;
       editSub = subtitles[0];
-      nextSub = subtitles[1];      
+      nextSub = subtitles[1];
       $('.sub-edit').val(editSub.value);
       $('.sub-next').val(nextSub.value);
       return false;
@@ -116,6 +116,7 @@ function subtitleRefresh() {
       editSub = subtitles[sub];
       prevSub = subtitles[parseInt(sub)-1];
       nextSub = subtitles[parseInt(sub)+1];
+      $('#subtitles h3').text(editSub.value);
       $('.sub-edit').val(editSub.value);
       $('.sub-next').val(nextSub.value);
       $('.sub-prev').val(prevSub.value);

@@ -6,7 +6,8 @@ var _ = require('lodash'),
     reVidID = /youtube(.+)/i,
     asrURI,
     videoID,
-    videoURL;
+    videoURL,
+    langCode;
 
 exports.getCaptions = function(req, res) {
     Captions.find(function(err, captions) {

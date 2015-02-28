@@ -28,7 +28,7 @@ exports.getVideo = function(req, res) {
       else {
         videoID = req.params.id.match(reVidID)[1];
         console.log(videoID);
-        videoURL = 'https://www.youtube.com/watch?v=' + videoID 
+        videoURL = 'https://www.youtube.com/watch?v=' + videoID;
         request(videoURL, function(error, response, body) {
           if (error) {
             // console.log(response);
@@ -45,9 +45,10 @@ exports.getVideo = function(req, res) {
             console.log(asrURI);
             request(asrURI, function(error, response, body) {
               parseString(body, function(err, result) {
-                console.dir(result);                
+                console.log(result);                
               });
             });
+            res.json({test: "this is the test json response"});
           }
         });        
       }

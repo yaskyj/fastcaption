@@ -59,6 +59,7 @@
     "twit": "^1.1.19",
     "uglify-js": "^2.4.16",
     "validator": "^3.28.0",
+    "xml2js": "^0.4.5",
     "yui": "^3.18.1"
   },
   "devDependencies": {

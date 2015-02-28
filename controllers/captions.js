@@ -1,4 +1,5 @@
 var _ = require('lodash'),
+    parseString = require('xml2js').parseString,
     Captions = require('../models/Captions'),
     request = require('request'),
     uriMatch,
@@ -43,7 +44,9 @@ exports.getVideo = function(req, res) {
             asrURI = asrURI + '&type=track&lang=en&name&kind=asr&fmt=1'
             console.log(asrURI);
             request(asrURI, function(error, response, body) {
-              console.log(body);
+              parseString(body, function(err, result) {
+                console.dir(result);                
+              });
             });
           }
         });        

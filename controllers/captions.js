@@ -1,5 +1,4 @@
 var _ = require('lodash'),
-    parseString = require('xml2js').parseString,
     Captions = require('../models/Captions'),
     request = require('request'),
     uriMatch,
@@ -44,11 +43,10 @@ exports.getVideo = function(req, res) {
             asrURI = asrURI + '&type=track&lang=en&name&kind=asr&fmt=1'
             console.log(asrURI);
             request(asrURI, function(error, response, body) {
-              parseString(body, function(err, result) {
-                console.log(result);                
-              });
+              res.json(JSON.stringify(body));
+              console.log(JSON.stringify(body));                
             });
-            res.json({test: "this is the test json response"});
+            // res.json({test: "this is the test json response"});
           }
         });        
       }

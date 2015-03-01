@@ -1,4 +1,6 @@
 var _ = require('lodash'),
+    parseString = require('xml2js').parseString,
+    reTitle = /<title>(.+) - YouTube</i,
     Captions = require('../models/Captions'),
     request = require('request'),
     uriMatch,
@@ -8,7 +10,12 @@ var _ = require('lodash'),
     asrURI,
     videoID,
     videoURL,
-    langCode;
+    title,
+    titleStr,
+    langCode,
+    captionsAsr = [],
+    craptionObj,
+    craptionID;
 
 exports.getCaptions = function(req, res) {
     Captions.find(function(err, captions) {
@@ -27,26 +34,41 @@ exports.getVideo = function(req, res) {
       else {
         videoID = req.params.id.match(reVidID)[1];
         console.log(videoID);
+        craptionID = 'youtube' + videoID;
         videoURL = 'https://www.youtube.com/watch?v=' + videoID;
         request(videoURL, function(error, response, body) {
           if (error) {
             // console.log(response);
           }
           if (!error && response.statusCode == 200) {
+            titleStr = body.match(reTitle);
+            title = titleStr !== null ? titleStr[1] : 'No title was found';
             uriMatch = body.match(reASR);
-            // console.log(body);
             asrURI = uriMatch[1];
-            // console.log(asrURI);
             asrURI = asrURI.replace(/\\u0026/g, '&');
             asrURI = asrURI.replace(/\\/g, '');
             asrURI = asrURI.replace(/%2C/g, ',');
             asrURI = asrURI + '&type=track&lang=en&name&kind=asr&fmt=1'
-            console.log(asrURI);
             request(asrURI, function(error, response, body) {
-              res.json(JSON.stringify(body));
-              console.log(JSON.stringify(body));                
+              parseString(body, function(err, result) {
+                _.forEach(result.transcript.text, function(element) {
+                  captionsAsr.push({
+                    'start': parseFloat(element['$'].start),
+                    'dur': parseFloat(element['$'].dur),
+                    'value': element['_'],
+                    'extra_data': []
+                  });
+                }); 
+                console.log(captionsAsr);
+                res.json(JSON.stringify(body));
+              });
             });
-            // res.json({test: "this is the test json response"});
+            craptionObj = {
+              '_id': craptionID,
+              'title': title,
+              'url': videoURL,
+              'captions': captionsAsr
+            }
           }
         });        
       }

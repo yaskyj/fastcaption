@@ -165,7 +165,7 @@ $(document).ready(function() {
       videoID = urlValue.trim();
     }
     $.getJSON('/video/youtube' + videoID, function(data) {
-      videoData = data
+      videoData = data;
       subtitles = videoData.captions;
       $('.search-bar').hide();
       $('.main-button').hide();

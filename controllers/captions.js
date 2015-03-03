@@ -49,6 +49,7 @@ exports.getVideo = function(req, res) {
             asrURI = asrURI.replace(/\\/g, '');
             asrURI = asrURI.replace(/%2C/g, ',');
             asrURI = asrURI + '&type=track&lang=en&name&kind=asr&fmt=1'
+            console.log(asrURI);
             request(asrURI, function(error, response, body) {
               parseString(body, function(err, result) {
                 _.forEach(result.transcript.text, function(element) {
@@ -59,16 +60,23 @@ exports.getVideo = function(req, res) {
                     'extra_data': []
                   });
                 }); 
-                console.log(captionsAsr);
+                // console.log(captionsAsr);
+                craptionObj = new Captions({
+                  '_id': craptionID,
+                  'title': title,
+                  'url': videoURL,
+                  'captions': captionsAsr
+                });
+                craptionObj.save(function(err, craptionObj) {
+                  if (err) return console.error(err);
+                  console.log(craptionObj);
+                });
+                // console.log(craptionObj);
+                // console.log(craptionID);
+                // console.log(videoURL);
                 res.json(JSON.stringify(body));
               });
             });
-            craptionObj = {
-              '_id': craptionID,
-              'title': title,
-              'url': videoURL,
-              'captions': captionsAsr
-            }
           }
         });        
       }

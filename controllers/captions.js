@@ -84,7 +84,7 @@ exports.getVideo = function(req, res) {
               });
             }
             else {
-              res.send("Didn't work");
+              res.json("Didn't work");
             }
           }
         });        

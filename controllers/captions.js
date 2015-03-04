@@ -70,11 +70,14 @@ exports.getVideo = function(req, res) {
                 craptionObj.save(function(err, craptionObj) {
                   if (err) return console.error(err);
                   console.log(craptionObj);
+                  Captions.findById(req.params.id, function(err, caption) {
+                    if (err) console.log(err);
+
+                    if (caption) {
+                      res.json(caption);
+                    }
+                  });
                 });
-                // console.log(craptionObj);
-                // console.log(craptionID);
-                // console.log(videoURL);
-                res.json(JSON.stringify(body));
               });
             });
           }

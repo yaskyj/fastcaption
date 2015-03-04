@@ -44,42 +44,48 @@ exports.getVideo = function(req, res) {
             titleStr = body.match(reTitle);
             title = titleStr !== null ? titleStr[1] : 'No title was found';
             uriMatch = body.match(reASR);
-            asrURI = uriMatch[1];
-            asrURI = asrURI.replace(/\\u0026/g, '&');
-            asrURI = asrURI.replace(/\\/g, '');
-            asrURI = asrURI.replace(/%2C/g, ',');
-            asrURI = asrURI + '&type=track&lang=en&name&kind=asr&fmt=1'
-            console.log(asrURI);
-            request(asrURI, function(error, response, body) {
-              parseString(body, function(err, result) {
-                _.forEach(result.transcript.text, function(element) {
-                  captionsAsr.push({
-                    'start': parseFloat(element['$'].start),
-                    'dur': parseFloat(element['$'].dur),
-                    'value': element['_'],
-                    'extra_data': []
+            if (uriMatch) {
+              console.log(uriMatch);
+              asrURI = uriMatch[1];
+              asrURI = asrURI.replace(/\\u0026/g, '&');
+              asrURI = asrURI.replace(/\\/g, '');
+              asrURI = asrURI.replace(/%2C/g, ',');
+              asrURI = asrURI + '&type=track&lang=en&name&kind=asr&fmt=1'
+              console.log(asrURI);
+              request(asrURI, function(error, response, body) {
+                parseString(body, function(err, result) {
+                  _.forEach(result.transcript.text, function(element) {
+                    captionsAsr.push({
+                      'start': parseFloat(element['$'].start),
+                      'dur': parseFloat(element['$'].dur),
+                      'value': element['_'],
+                      'extra_data': []
+                    });
+                  }); 
+                  // console.log(captionsAsr);
+                  craptionObj = new Captions({
+                    '_id': craptionID,
+                    'title': title,
+                    'url': videoURL,
+                    'captions': captionsAsr
                   });
-                }); 
-                // console.log(captionsAsr);
-                craptionObj = new Captions({
-                  '_id': craptionID,
-                  'title': title,
-                  'url': videoURL,
-                  'captions': captionsAsr
-                });
-                craptionObj.save(function(err, craptionObj) {
-                  if (err) return console.error(err);
-                  console.log(craptionObj);
-                  Captions.findById(req.params.id, function(err, caption) {
-                    if (err) console.log(err);
+                  craptionObj.save(function(err, craptionObj) {
+                    if (err) return console.error(err);
+                    console.log(craptionObj);
+                    Captions.findById(req.params.id, function(err, caption) {
+                      if (err) console.log(err);
 
-                    if (caption) {
-                      res.json(caption);
-                    }
+                      if (caption) {
+                        res.json(caption);
+                      }
+                    });
                   });
                 });
               });
-            });
+            }
+            else {
+              res.send("Didn't work");
+            }
           }
         });        
       }

@@ -24,6 +24,10 @@ exports.getCaptions = function(req, res) {
     });
 };
 
+exports.saveVideo = function(req, res) {
+  console.log('Temp saveVideo function');
+};
+
 exports.getVideo = function(req, res) {
     Captions.findById(req.params.id, function(err, caption) {
       if (err) console.log(err);

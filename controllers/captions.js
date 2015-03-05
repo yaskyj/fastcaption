@@ -84,7 +84,24 @@ exports.getVideo = function(req, res) {
               });
             }
             else {
-              res.json("Didn't work");
+              craptionObj = new Captions({
+                '_id': craptionID,
+                'title': title,
+                'url': videoURL,
+                'captions': []
+              });
+              console.log(craptionObj);
+              craptionObj.save(function(err, craptionObj) {
+                if (err) return console.error(err);
+                console.log(craptionObj);
+                Captions.findById(req.params.id, function(err, caption) {
+                  if (err) console.log(err);
+
+                  if (caption) {
+                    res.json(caption);
+                  }
+                });
+              });
             }
           }
         });        

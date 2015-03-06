@@ -114,7 +114,7 @@ app.get('/captions', captionsController.getCaptions);
 app.get('/caption/:id', captionsController.getCaption);
 app.get('/title/:id', captionsController.getTitle);
 app.get('/video/:id', captionsController.getVideo);
-app.post('/video/:id', captionsController.saveVideo);
+app.get('/video/save/:id', captionsController.saveVideo);
 
 /**
  * API examples routes.

@@ -108,6 +108,7 @@ function subtitleRefresh() {
       nextSub = subtitles[1];
       $('.sub-edit').val(editSub.value);
       $('.sub-next').val(nextSub.value);
+      $('.sub-prev').val('');
       return false;
     }
 
@@ -143,6 +144,7 @@ function saveCaption() {
   $.ajax({
     type: 'GET',
     url: '/video/save/' + videoID,
+    processData: false,
     data: videoData
   });
   // console.log(videoData);

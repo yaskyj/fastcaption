@@ -25,7 +25,7 @@ exports.getCaptions = function(req, res) {
 };
 
 exports.saveVideo = function(req, res) {
-  console.log('Temp saveVideo function');
+  console.log(req.body.title);
 };
 
 exports.getVideo = function(req, res) {

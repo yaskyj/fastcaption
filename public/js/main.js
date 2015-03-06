@@ -140,7 +140,12 @@ function subRefHandling() {
 function saveCaption() {
   console.log(currentSubIndex);
   videoData.captions[currentSubIndex].value = $('.sub-edit').val();
-  console.log(videoData);
+  $.ajax({
+    type: 'GET',
+    url: '/video/save/' + videoID,
+    data: videoData
+  });
+  // console.log(videoData);
   $('.sub-edit').focusout(function() {
     player.playVideo();
     subtitleChangeInterval = setInterval(subtitleRefresh, 100);

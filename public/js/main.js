@@ -148,10 +148,10 @@ function saveCaption() {
     data: videoData
   });
   // console.log(videoData);
-  $('.sub-edit').focusout(function() {
-    player.playVideo();
-    subtitleChangeInterval = setInterval(subtitleRefresh, 100);
-  });  
+  $(document).focus();  
+  player.playVideo();
+  subtitleChangeInterval = setInterval(subtitleRefresh, 100);
+
 }
 
 function startCaptionTime() {

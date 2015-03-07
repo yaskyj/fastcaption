@@ -99,29 +99,31 @@ Mousetrap.bind('ctrl+shift+s', saveCaption);
 Mousetrap.bind('ctrl+shift+q', startCaptionTime);
 
 function subtitleRefresh() {
-  for (sub in subtitles) {
-    timeStart = subtitles[sub].start,
-    timeEnd = subtitles[sub].start + subtitles[sub].dur;
-    if (player.getCurrentTime() < subtitles[0].start) {
-      currentSubIndex = sub;
-      editSub = subtitles[0];
-      nextSub = subtitles[1];
-      $('.sub-edit').val(editSub.value);
-      $('.sub-next').val(nextSub.value);
-      $('.sub-prev').val('');
-      return false;
-    }
+  if (player.getPlayerState() === 1) {
+    for (sub in subtitles) {
+      timeStart = subtitles[sub].start,
+      timeEnd = subtitles[sub].start + subtitles[sub].dur;
+      if (player.getCurrentTime() < subtitles[0].start) {
+        currentSubIndex = sub;
+        editSub = subtitles[0];
+        nextSub = subtitles[1];
+        $('.sub-edit').val(editSub.value);
+        $('.sub-next').val(nextSub.value);
+        $('.sub-prev').val('');
+        return false;
+      }
 
-    if (player.getCurrentTime() >= timeStart && player.getCurrentTime() <= timeEnd) {
-      currentSubIndex = sub;
-      editSub = subtitles[sub];
-      prevSub = subtitles[parseInt(sub)-1];
-      nextSub = subtitles[parseInt(sub)+1];
-      $('#subtitles h3').text(editSub.value);
-      $('.sub-edit').val(editSub.value);
-      $('.sub-next').val(nextSub.value);
-      $('.sub-prev').val(prevSub.value);
-      return false;
+      if (player.getCurrentTime() >= timeStart && player.getCurrentTime() <= timeEnd) {
+        currentSubIndex = sub;
+        editSub = subtitles[sub];
+        prevSub = subtitles[parseInt(sub)-1];
+        nextSub = subtitles[parseInt(sub)+1];
+        $('#subtitles h3').text(editSub.value);
+        $('.sub-edit').val(editSub.value);
+        $('.sub-next').val(nextSub.value);
+        $('.sub-prev').val(prevSub.value);
+        return false;
+      }
     }
   }
 }
@@ -148,7 +150,7 @@ function saveCaption() {
     data: videoData
   });
   // console.log(videoData);
-  $(document).focus();  
+  // $(document).focus();  
   player.playVideo();
   subtitleChangeInterval = setInterval(subtitleRefresh, 100);
 

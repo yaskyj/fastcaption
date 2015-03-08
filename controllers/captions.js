@@ -25,7 +25,7 @@ exports.getCaptions = function(req, res) {
 };
 
 exports.saveVideo = function(req, res) {
-  console.log(req.body);
+  console.log(req.body['_id']);
 };
 
 exports.getVideo = function(req, res) {

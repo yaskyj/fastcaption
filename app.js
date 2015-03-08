@@ -76,7 +76,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
 app.use(lusca({
-  csrf: true,
+  csrf: false,
   xframe: 'SAMEORIGIN',
   xssProtection: true
 }));
@@ -114,7 +114,7 @@ app.get('/captions', captionsController.getCaptions);
 app.get('/caption/:id', captionsController.getCaption);
 app.get('/title/:id', captionsController.getTitle);
 app.get('/video/:id', captionsController.getVideo);
-app.get('/video/save/:id', captionsController.saveVideo);
+app.post('/video/:id', captionsController.saveVideo);
 
 /**
  * API examples routes.

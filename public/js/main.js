@@ -128,29 +128,18 @@ function subtitleRefresh() {
   }
 }
 
-function subRefHandling() {
-  if ($('.sub-edit') == document.activeElement) {
-    player.pauseVideo();
-    clearInterval(subtitleChangeInterval);
-
-  }
-  else {
-    player.playVideo();
-    subtitleChangeInterval = setInterval(subtitleRefresh, 100);
-  }
-}
-
 function saveCaption() {
   console.log(currentSubIndex);
   videoData.captions[currentSubIndex].value = $('.sub-edit').val();
   $.ajax({
-    type: 'GET',
-    url: '/video/save/' + videoID,
-    processData: false,
-    data: videoData
+    url: '/video/' + videoID,
+    type: 'POST',
+    data: JSON.stringify(videoData),
+    contentType: 'application/json; charset=utf-8',
+    dataType: 'json'
   });
   // console.log(videoData);
-  // $(document).focus();  
+  $(document).focusout();  
   player.playVideo();
   subtitleChangeInterval = setInterval(subtitleRefresh, 100);
 

@@ -108,8 +108,14 @@ function subtitleRefresh() {
         editSub = subtitles[0];
         nextSub = subtitles[1];
         $('.sub-edit').val(editSub.value);
+        $('.edit-start').text(editSub.start);
+        $('.edit-end').text(editSub.start + editSub.dur);
         $('.sub-next').val(nextSub.value);
+        $('.next-start').text(nextSub.start);
+        $('.next-end').text(nextSub.start + nextSub.dur);
         $('.sub-prev').val('');
+        $('.prev-start').val('');
+        $('.prev-end').val('');
         return false;
       }
 
@@ -118,10 +124,17 @@ function subtitleRefresh() {
         editSub = subtitles[sub];
         prevSub = subtitles[parseInt(sub)-1];
         nextSub = subtitles[parseInt(sub)+1];
+        console.log(player.getCurrentTime());
         $('#subtitles h3').text(editSub.value);
         $('.sub-edit').val(editSub.value);
+        $('.edit-start').text(editSub.start);
+        $('.edit-end').text(editSub.start + editSub.dur);
         $('.sub-next').val(nextSub.value);
+        $('.next-start').text(nextSub.start);
+        $('.next-end').text(nextSub.start + nextSub.dur);
         $('.sub-prev').val(prevSub.value);
+        $('.prev-start').text(prevSub.start);
+        $('.prev-end').text(prevSub.start + prevSub.dur);
         return false;
       }
     }
@@ -141,12 +154,8 @@ function saveCaption() {
   $('.sub-edit').focusout();
   rewindVideo();
   player.playVideo();
-  console.log(videoData);
+  // console.log(videoData);
   subtitleChangeInterval = setInterval(subtitleRefresh, 100);
-  // $.getJSON('/video/youtube' + videoID, function(data) {
-  //   videoData = data;
-  //   subtitles = videoData.captions;
-  // });
 }
 
 function startCaptionTime() {

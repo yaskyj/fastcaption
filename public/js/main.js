@@ -138,11 +138,15 @@ function saveCaption() {
     contentType: 'application/json; charset=utf-8',
     dataType: 'json'
   });
-  // console.log(videoData);
-  $(document).focusout();  
+  $('.sub-edit').focusout();
+  rewindVideo();
   player.playVideo();
+  console.log(videoData);
   subtitleChangeInterval = setInterval(subtitleRefresh, 100);
-
+  // $.getJSON('/video/youtube' + videoID, function(data) {
+  //   videoData = data;
+  //   subtitles = videoData.captions;
+  // });
 }
 
 function startCaptionTime() {

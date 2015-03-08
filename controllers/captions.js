@@ -25,7 +25,12 @@ exports.getCaptions = function(req, res) {
 };
 
 exports.saveVideo = function(req, res) {
-  console.log(req.body['_id']);
+  console.log(req.body.title);
+  Captions.findByIdAndUpdate(req.body['_id'], req.body, function(err, caption) {
+    if (err) {console.log(err)};
+
+    if (caption) {console.log(caption.title)};
+  });
 };
 
 exports.getVideo = function(req, res) {

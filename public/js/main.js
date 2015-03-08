@@ -17,7 +17,8 @@ var urlValue,
   nextSub,
   editSub,
   videoData,
-  currentSubIndex;
+  currentSubIndex,
+  startCaption;
 
 function onYouTubeIframeAPIReady() {
   player = new YT.Player('player', {
@@ -109,12 +110,12 @@ function subtitleRefresh() {
         currentSubIndex = sub;
         editSub = subtitles[0];
         nextSub = subtitles[1];
-        $('.sub-edit').val(editSub.value);
-        $('.edit-start').text(editSub.start);
-        $('.edit-end').text(editSub.start + editSub.dur);
-        $('.sub-next').val(nextSub.value);
-        $('.next-start').text(nextSub.start);
-        $('.next-end').text(nextSub.start + nextSub.dur);
+        $('.sub-edit').val('');
+        $('.edit-start').val('');
+        $('.edit-end').val('');
+        $('.sub-next').val('');
+        $('.next-start').val('');
+        $('.next-end').val('');
         $('.sub-prev').val('');
         $('.prev-start').val('');
         $('.prev-end').val('');
@@ -128,14 +129,14 @@ function subtitleRefresh() {
         nextSub = subtitles[parseInt(sub)+1];
         $('#subtitles h3').text(editSub.value);
         $('.sub-edit').val(editSub.value);
-        $('.edit-start').text(editSub.start);
-        $('.edit-end').text(editSub.start + editSub.dur);
+        $('.edit-start').val(editSub.start);
+        $('.edit-end').val(editSub.start + editSub.dur);
         $('.sub-next').val(nextSub.value);
-        $('.next-start').text(nextSub.start);
-        $('.next-end').text(nextSub.start + nextSub.dur);
+        $('.next-start').val(nextSub.start);
+        $('.next-end').val(nextSub.start + nextSub.dur);
         $('.sub-prev').val(prevSub.value);
-        $('.prev-start').text(prevSub.start);
-        $('.prev-end').text(prevSub.start + prevSub.dur);
+        $('.prev-start').val(prevSub.start);
+        $('.prev-end').val(prevSub.start + prevSub.dur);
         return false;
       }
     }
@@ -143,9 +144,7 @@ function subtitleRefresh() {
 }
 
 function deleteCaption() {
-  console.log(currentSubIndex);
   videoData.captions.splice(currentSubIndex, 1);
-  console.log(videoData.captions);
   $.ajax({
     url: '/video/' + videoID,
     type: 'POST',
@@ -157,12 +156,48 @@ function deleteCaption() {
   rewindVideo();
   player.playVideo();
   // console.log(videoData);
-  subtitleChangeInterval = setInterval(subtitleRefresh, 100);
+  // subtitleChangeInterval = setInterval(subtitleRefresh, 100);
+}
+
+function startCaptionTime() {
+  console.log(videoData);
+  if (currentSubIndex) {
+    console.log("True")
+    startCaption = 
+    {
+      "start": player.getCurrentTime(),
+      "extra_data": []
+    }
+    videoData.captions.splice(currentSubIndex, 0, startCaption);
+  }
+  else {
+    startCaption = 
+    {
+      "start": player.getCurrentTime(),
+      "extra_data": []
+    }
+    videoData.captions.push(startCaption);
+    console.log("false");
+  }
+  console.log(currentSubIndex);
 }
 
 function saveCaption() {
   console.log(currentSubIndex);
   videoData.captions[currentSubIndex].value = $('.sub-edit').val();
+  videoData.captions[currentSubIndex].start = parseFloat($('.edit-start').val());
+  videoData.captions[currentSubIndex].dur = parseFloat($('.edit-end').val()) - parseFloat($('.edit-start').val());
+  if (currentSubIndex > 0) {
+    videoData.captions[parseInt(currentSubIndex)-1].start = parseFloat($('.prev-start').val());
+    videoData.captions[parseInt(currentSubIndex)-1].dur = parseFloat($('.prev-end').val()) - parseFloat($('.prev-start').val());    
+  }
+  videoData.captions[parseInt(currentSubIndex)+1].start = parseFloat($('.next-start').val());
+  videoData.captions[parseInt(currentSubIndex)+1].dur = parseFloat($('.next-end').val()) - parseFloat($('.next-start').val());
+  subtitles = videoData.captions;
+  if (!(videoData.captions[currentSubIndex].dur)) {
+    console.log("No duration")
+    return false;
+  }
   $.ajax({
     url: '/video/' + videoID,
     type: 'POST',
@@ -175,10 +210,6 @@ function saveCaption() {
   player.playVideo();
   // console.log(videoData);
   subtitleChangeInterval = setInterval(subtitleRefresh, 100);
-}
-
-function startCaptionTime() {
-  console.log(player.getCurrentTime());
 }
 
 $(document).ready(function() {

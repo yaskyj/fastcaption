@@ -97,6 +97,8 @@ Mousetrap.bind('ctrl+2', rewindVideo);
 Mousetrap.bind('ctrl+3', forwardVideo);
 Mousetrap.bind('ctrl+shift+s', saveCaption);
 Mousetrap.bind('ctrl+shift+q', startCaptionTime);
+Mousetrap.bind('ctrl+shift+d', deleteCaption);
+
 
 function subtitleRefresh() {
   if (player.getPlayerState() === 1) {
@@ -124,7 +126,6 @@ function subtitleRefresh() {
         editSub = subtitles[sub];
         prevSub = subtitles[parseInt(sub)-1];
         nextSub = subtitles[parseInt(sub)+1];
-        console.log(player.getCurrentTime());
         $('#subtitles h3').text(editSub.value);
         $('.sub-edit').val(editSub.value);
         $('.edit-start').text(editSub.start);
@@ -139,6 +140,24 @@ function subtitleRefresh() {
       }
     }
   }
+}
+
+function deleteCaption() {
+  console.log(currentSubIndex);
+  videoData.captions.splice(currentSubIndex, 1);
+  console.log(videoData.captions);
+  $.ajax({
+    url: '/video/' + videoID,
+    type: 'POST',
+    data: JSON.stringify(videoData),
+    contentType: 'application/json; charset=utf-8',
+    dataType: 'json'
+  });
+  $('.sub-edit').focusout();
+  rewindVideo();
+  player.playVideo();
+  // console.log(videoData);
+  subtitleChangeInterval = setInterval(subtitleRefresh, 100);
 }
 
 function saveCaption() {

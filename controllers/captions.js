@@ -25,7 +25,6 @@ exports.getCaptions = function(req, res) {
 };
 
 exports.saveVideo = function(req, res) {
-  console.log(req.body.title);
   Captions.findByIdAndUpdate(req.body['_id'], req.body, function(err, caption) {
     if (err) {console.log(err)};
 

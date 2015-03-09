@@ -80,13 +80,13 @@ function speedupVideo() {
 }
 
 function rewindVideo() {
-  player.seekTo((player.getCurrentTime()-5), true);
+  player.seekTo((player.getCurrentTime()-2), true);
   player.playVideo();
   console.log(player.getCurrentTime());
 }
 
 function forwardVideo() {
-  player.seekTo((player.getCurrentTime()+5), true);
+  player.seekTo((player.getCurrentTime()+2), true);
   player.playVideo();
   console.log(player.getCurrentTime());
 }
@@ -97,7 +97,7 @@ Mousetrap.bind('ctrl+5', speedupVideo);
 Mousetrap.bind('ctrl+2', rewindVideo);
 Mousetrap.bind('ctrl+3', forwardVideo);
 Mousetrap.bind('ctrl+shift+s', saveCaption);
-Mousetrap.bind('ctrl+shift+q', startCaptionTime);
+Mousetrap.bind('ctrl+shift+q', addCaption);
 Mousetrap.bind('ctrl+shift+d', deleteCaption);
 
 
@@ -152,6 +152,7 @@ function deleteCaption() {
     contentType: 'application/json; charset=utf-8',
     dataType: 'json'
   });
+  subtitles = videoData.captions;
   $('.sub-edit').focusout();
   rewindVideo();
   player.playVideo();
@@ -159,27 +160,54 @@ function deleteCaption() {
   // subtitleChangeInterval = setInterval(subtitleRefresh, 100);
 }
 
-function startCaptionTime() {
+function addCaption() {
   console.log(videoData);
   if (currentSubIndex) {
-    console.log("True")
     startCaption = 
     {
-      "start": player.getCurrentTime(),
-      "extra_data": []
-    }
+      'start': player.getCurrentTime(),
+      'dur': 5.0,
+      'value': 'Add caption text and change beginning and ending times',
+      'extra_data': []
+    };
     videoData.captions.splice(currentSubIndex, 0, startCaption);
+    subtitles = videoData.captions;
+    editSub = subtitles[currentSubIndex];
+    prevSub = subtitles[parseInt(currentSubIndex)-1];
+    nextSub = subtitles[parseInt(currentSubIndex)+1];
+    $('#subtitles h3').text(editSub.value);
+    $('.sub-edit').val(editSub.value);
+    $('.edit-start').val(editSub.start);
+    $('.edit-end').val(editSub.start + editSub.dur);
+    $('.sub-next').val(nextSub.value);
+    $('.next-start').val(nextSub.start);
+    $('.next-end').val(nextSub.start + nextSub.dur);
+    $('.sub-prev').val(prevSub.value);
+    $('.prev-start').val(prevSub.start);
+    $('.prev-end').val(prevSub.start + prevSub.dur);
+    saveCaption();
   }
   else {
+    currentSubIndex = 0;
     startCaption = 
     {
-      "start": player.getCurrentTime(),
-      "extra_data": []
-    }
+      'start': player.getCurrentTime(),
+      'dur': 5.0,
+      'value': 'Add caption text and change beginning and ending times', 
+      'extra_data': []
+    };
     videoData.captions.push(startCaption);
-    console.log("false");
+    subtitles = videoData.captions;
+    console.log(subtitles);
+    editSub = subtitles[currentSubIndex];
+    console.log(editSub);
+    console.log(editSub.value)
+    $('#subtitles h3').text(editSub.value);
+    $('.sub-edit').val(editSub.value);
+    $('.edit-start').val(editSub.start);
+    $('.edit-end').val(editSub.start + editSub.dur);
+    saveCaption();
   }
-  console.log(currentSubIndex);
 }
 
 function saveCaption() {
@@ -191,8 +219,10 @@ function saveCaption() {
     videoData.captions[parseInt(currentSubIndex)-1].start = parseFloat($('.prev-start').val());
     videoData.captions[parseInt(currentSubIndex)-1].dur = parseFloat($('.prev-end').val()) - parseFloat($('.prev-start').val());    
   }
-  videoData.captions[parseInt(currentSubIndex)+1].start = parseFloat($('.next-start').val());
-  videoData.captions[parseInt(currentSubIndex)+1].dur = parseFloat($('.next-end').val()) - parseFloat($('.next-start').val());
+  if (currentSubIndex < videoData.captions.length-1) {
+    videoData.captions[parseInt(currentSubIndex)+1].start = parseFloat($('.next-start').val());
+    videoData.captions[parseInt(currentSubIndex)+1].dur = parseFloat($('.next-end').val()) - parseFloat($('.next-start').val());    
+  }
   subtitles = videoData.captions;
   if (!(videoData.captions[currentSubIndex].dur)) {
     console.log("No duration")

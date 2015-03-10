@@ -106,27 +106,28 @@ function subtitleRefresh() {
     for (sub in subtitles) {
       timeStart = subtitles[sub].start,
       timeEnd = subtitles[sub].start + subtitles[sub].dur;
-      if (player.getCurrentTime() < subtitles[0].start) {
-        currentSubIndex = sub;
-        editSub = subtitles[0];
-        nextSub = subtitles[1];
-        $('.sub-edit').val('');
-        $('.edit-start').val('');
-        $('.edit-end').val('');
-        $('.sub-next').val('');
-        $('.next-start').val('');
-        $('.next-end').val('');
-        $('.sub-prev').val('');
-        $('.prev-start').val('');
-        $('.prev-end').val('');
-        return false;
-      }
+      // if (player.getCurrentTime() < subtitles[0].start) {
+      //   currentSubIndex = sub;
+      //   editSub = subtitles[0];
+      //   nextSub = subtitles[1];
+      //   $('.sub-edit').val('');
+      //   $('.edit-start').val('');
+      //   $('.edit-end').val('');
+      //   $('.sub-next').val('');
+      //   $('.next-start').val('');
+      //   $('.next-end').val('');
+      //   $('.sub-prev').val('');
+      //   $('.prev-start').val('');
+      //   $('.prev-end').val('');
+      //   return false;
+      // }
 
       if (player.getCurrentTime() >= timeStart && player.getCurrentTime() <= timeEnd) {
         currentSubIndex = sub;
         editSub = subtitles[sub];
         prevSub = subtitles[parseInt(sub)-1];
         nextSub = subtitles[parseInt(sub)+1];
+        console.log(currentSubIndex);
         $('#subtitles h3').text(editSub.value);
         $('.sub-edit').val(editSub.value);
         $('.edit-start').val(editSub.start);
@@ -138,6 +139,20 @@ function subtitleRefresh() {
         $('.prev-start').val(prevSub.start);
         $('.prev-end').val(prevSub.start + prevSub.dur);
         return false;
+      }
+
+      if (!(player.getCurrentTime() >= timeStart && player.getCurrentTime() <= timeEnd) && currentSubIndex === subtitles[subtitles.length-1]) {
+        console.log(currentSubIndex);
+        $('.sub-edit').val('');
+        $('.edit-start').val('');
+        $('.edit-end').val('');
+        $('.sub-next').val('');
+        $('.next-start').val('');
+        $('.next-end').val('');
+        $('.sub-prev').val(subtitles[subtitles.length-1].value);
+        $('.prev-start').val(subtitles[subtitles.length-1].start);
+        $('.prev-end').val(subtitles[subtitles.length-1].start + subtitles[subtitles.length-1].dur);
+        return false;        
       }
     }
   }

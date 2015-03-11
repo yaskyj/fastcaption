@@ -102,6 +102,7 @@ Mousetrap.bind('ctrl+shift+d', deleteCaption);
 
 
 function subtitleRefresh() {
+  console.log(player.getCurrentTime());
   if (player.getPlayerState() === 1) {
     for (sub in subtitles) {
       timeStart = subtitles[sub].start,
@@ -141,8 +142,8 @@ function subtitleRefresh() {
         return false;
       }
 
-      if (!(player.getCurrentTime() >= timeStart && player.getCurrentTime() <= timeEnd) && currentSubIndex === subtitles[subtitles.length-1]) {
-        console.log(currentSubIndex);
+      if (sub === subtitles[subtitles.length-1]) {
+        console.log(sub);
         $('.sub-edit').val('');
         $('.edit-start').val('');
         $('.edit-end').val('');

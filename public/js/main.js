@@ -53,9 +53,6 @@ function onPlayerReady(event) {
   });
 }
 
-function onPlayerStateChange(event) {
-}
-
 function pauseVideo() {
   if (player.getPlayerState() === 1) {
     player.pauseVideo();

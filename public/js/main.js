@@ -140,7 +140,7 @@ function subtitleRefresh() {
       }
 
       if (sub === subtitles[subtitles.length-1]) {
-        console.log(sub);
+        console.log(sub + " " + subtitles.length-1);
         $('.sub-edit').val('');
         $('.edit-start').val('');
         $('.edit-end').val('');

@@ -88,7 +88,7 @@ Mousetrap.bind('ctrl+5', speedupVideo);
 Mousetrap.bind('ctrl+2', rewindVideo);
 Mousetrap.bind('ctrl+3', forwardVideo);
 Mousetrap.bind('ctrl+shift+s', saveCaption);
-Mousetrap.bind('ctrl+shift+q', addCaption);
+Mousetrap.bind('ctrl+shift+a', addCaption);
 Mousetrap.bind('ctrl+shift+d', deleteCaption);
 
 

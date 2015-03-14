@@ -31,7 +31,6 @@ function onYouTubeIframeAPIReady() {
     },
     events: {
       'onReady': onPlayerReady,
-      'onStateChange': onPlayerStateChange
     }
   });
 }
@@ -45,11 +44,6 @@ function onPlayerReady(event) {
   
   $('.sub-edit').focus(function() {
     player.pauseVideo();
-    clearInterval(subtitleChangeInterval);
-  });
-  $('.sub-edit').focusout(function() {
-    player.playVideo();
-    subtitleChangeInterval = setInterval(subtitleRefresh, 100);
   });
 }
 
@@ -99,7 +93,6 @@ Mousetrap.bind('ctrl+shift+d', deleteCaption);
 
 
 function subtitleRefresh() {
-  //need to fix this
   console.log(player.getCurrentTime());
   if (player.getPlayerState() === 1) {
     for (sub in subtitles) {
@@ -170,8 +163,6 @@ function deleteCaption() {
   $('.sub-edit').focusout();
   rewindVideo();
   player.playVideo();
-  // console.log(videoData);
-  // subtitleChangeInterval = setInterval(subtitleRefresh, 100);
 }
 
 function addCaption() {

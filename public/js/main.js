@@ -237,7 +237,6 @@ function addCaption() {
     $('.sub-prev').val(prevSub.value);
     $('.prev-start').val(prevSub.start);
     $('.prev-end').val(prevSub.start + prevSub.dur);
-    saveCaption();
   }
   else {
     currentSubIndex = 0;
@@ -258,7 +257,6 @@ function addCaption() {
     $('.sub-edit').val(editSub.value);
     $('.edit-start').val(editSub.start);
     $('.edit-end').val(editSub.start + editSub.dur);
-    saveCaption();
   }
 }
 

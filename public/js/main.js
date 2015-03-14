@@ -99,6 +99,7 @@ Mousetrap.bind('ctrl+shift+d', deleteCaption);
 
 
 function subtitleRefresh() {
+  //need to fix this
   console.log(player.getCurrentTime());
   if (player.getPlayerState() === 1) {
     for (sub in subtitles) {

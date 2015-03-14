@@ -55,16 +55,16 @@ block content
         #overlay
         #subtitles
           h3
-        .text-left
-          h3 Current Player Time
-          #player-time
+      .text-left#current-player-time
+        h3 Current Player Time
+        #player-time
     .col-lg-3
       .text-left
         .prev-head
           h5 Previous Subtitle
           p
             textarea.mousetrap.prev-start(rows="1", cols="5")
-            | to 
+            |&nbspto 
             textarea.mousetrap.prev-end(rows="1", cols="5")
       .text-center
         textarea.input-lg.mousetrap.sub-prev(rows="5", cols="50", readonly="readonly")
@@ -73,7 +73,7 @@ block content
           h5 Current Subtitle
           p
             textarea.mousetrap.edit-start(rows="1", cols="5")
-            | to 
+            |&nbspto 
             textarea.mousetrap.edit-end(rows="1", cols="5")
       .text-center
         textarea.input-lg.mousetrap.sub-edit(rows="5", cols="50")
@@ -82,7 +82,7 @@ block content
           h5 Next Subtitle
           p
             textarea.mousetrap.next-start(rows="1", cols="5")
-            | to 
+            |&nbspto 
             textarea.mousetrap.next-end(rows="1", cols="5")
       .text-center
         textarea.input-lg.mousetrap.sub-next(rows="5", cols="50", readonly="readonly")

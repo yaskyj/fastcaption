@@ -314,6 +314,7 @@ $(document).ready(function() {
       $('.shortcuts').fadeIn();
       $('.video-main').show();
       $('#player').show();
+      $('#current-player-time').show();
       $('#overlay').show();
       $('.sub-prev').show();
       $('.sub-edit').show();

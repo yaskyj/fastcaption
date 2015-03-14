@@ -94,9 +94,25 @@ Mousetrap.bind('ctrl+shift+d', deleteCaption);
 
 function subtitleRefresh() {
   console.log(player.getCurrentTime());
+  $('#player-time').text(player.getCurrentTime());
+
   if (player.getPlayerState() === 1) {
+    if (player.getCurrentTime() > (subtitles[subtitles.length-1].start + subtitles[subtitles.length-1].dur)) {
+      $('.sub-edit').val('');
+      $('.edit-start').val('');
+      $('.edit-end').val('');
+      $('.sub-next').val('');
+      $('.next-start').val('');
+      $('.next-end').val('');
+      $('.sub-prev').val(subtitles[subtitles.length-1].value);
+      $('.prev-start').val(subtitles[subtitles.length-1].start);
+      $('.prev-end').val(subtitles[subtitles.length-1].start + subtitles[subtitles.length-1].dur);
+      $('#subtitles h3').text('');
+      return false;
+    }
+
     for (sub in subtitles) {
-      timeStart = subtitles[sub].start,
+      timeStart = subtitles[sub].start;
       timeEnd = subtitles[sub].start + subtitles[sub].dur;
       // if (player.getCurrentTime() < subtitles[0].start) {
       //   currentSubIndex = sub;
@@ -120,31 +136,58 @@ function subtitleRefresh() {
         prevSub = subtitles[parseInt(sub)-1];
         nextSub = subtitles[parseInt(sub)+1];
         console.log(currentSubIndex);
-        $('#subtitles h3').text(editSub.value);
-        $('.sub-edit').val(editSub.value);
-        $('.edit-start').val(editSub.start);
-        $('.edit-end').val(editSub.start + editSub.dur);
-        $('.sub-next').val(nextSub.value);
-        $('.next-start').val(nextSub.start);
-        $('.next-end').val(nextSub.start + nextSub.dur);
-        $('.sub-prev').val(prevSub.value);
-        $('.prev-start').val(prevSub.start);
-        $('.prev-end').val(prevSub.start + prevSub.dur);
-        return false;
-      }
-
-      if (sub === subtitles[subtitles.length-1]) {
-        console.log(sub + " " + subtitles.length-1);
-        $('.sub-edit').val('');
-        $('.edit-start').val('');
-        $('.edit-end').val('');
-        $('.sub-next').val('');
-        $('.next-start').val('');
-        $('.next-end').val('');
-        $('.sub-prev').val(subtitles[subtitles.length-1].value);
-        $('.prev-start').val(subtitles[subtitles.length-1].start);
-        $('.prev-end').val(subtitles[subtitles.length-1].start + subtitles[subtitles.length-1].dur);
-        return false;        
+        if (nextSub && prevSub) {
+          $('#subtitles h3').text(editSub.value);
+          $('.sub-edit').val(editSub.value);
+          $('.edit-start').val(editSub.start);
+          $('.edit-end').val(editSub.start + editSub.dur);
+          $('.sub-next').val(nextSub.value);
+          $('.next-start').val(nextSub.start);
+          $('.next-end').val(nextSub.start + nextSub.dur);
+          $('.sub-prev').val(prevSub.value);
+          $('.prev-start').val(prevSub.start);
+          $('.prev-end').val(prevSub.start + prevSub.dur);
+          return false;
+        }
+        else if (!prevSub && !nextSub) {
+          $('#subtitles h3').text(editSub.value);
+          $('.sub-edit').val(editSub.value);
+          $('.edit-start').val(editSub.start);
+          $('.edit-end').val(editSub.start + editSub.dur);
+          $('.sub-next').val('');
+          $('.next-start').val('');
+          $('.next-end').val('');
+          $('.sub-prev').val('');
+          $('.prev-start').val('');
+          $('.prev-end').val('');
+          return false;
+        }
+        else if (!prevSub) {
+          $('#subtitles h3').text(editSub.value);
+          $('.sub-edit').val(editSub.value);
+          $('.edit-start').val(editSub.start);
+          $('.edit-end').val(editSub.start + editSub.dur);
+          $('.sub-next').val(nextSub.value);
+          $('.next-start').val(nextSub.start);
+          $('.next-end').val(nextSub.start + nextSub.dur);
+          $('.sub-prev').val('');
+          $('.prev-start').val('');
+          $('.prev-end').val('');
+          return false;
+        }
+        else {
+          $('#subtitles h3').text(editSub.value);
+          $('.sub-edit').val(editSub.value);
+          $('.edit-start').val(editSub.start);
+          $('.edit-end').val(editSub.start + editSub.dur);
+          $('.sub-next').val('');
+          $('.next-start').val('');
+          $('.next-end').val('');
+          $('.sub-prev').val(prevSub.value);
+          $('.prev-start').val(prevSub.start);
+          $('.prev-end').val(prevSub.start + prevSub.dur);
+          return false;          
+        }
       }
     }
   }
@@ -160,7 +203,10 @@ function deleteCaption() {
     dataType: 'json'
   });
   subtitles = videoData.captions;
-  $('.sub-edit').focusout();
+  $('#subtitles h3').text('');
+  $('.sub-edit').val('');
+  $('.edit-start').val('');
+  $('.edit-end').val('');
   rewindVideo();
   player.playVideo();
 }
@@ -281,6 +327,7 @@ $(document).ready(function() {
     });
   });
 
+  //Test Videos
   //https://www.youtube.com/watch?v=MftOONlDQac
   //https://www.youtube.com/watch?v=fPloDzu_wcI
   //https://www.youtube.com/watch?v=poL7l-Uk3I8

@@ -111,24 +111,24 @@ function subtitleRefresh() {
       return false;
     }
 
+    if (player.getCurrentTime() < subtitles[0].start) {
+      currentSubIndex = sub;
+      editSub = subtitles[0];
+      nextSub = subtitles[1];
+      $('.sub-edit').val('');
+      $('.edit-start').val('');
+      $('.edit-end').val('');
+      $('.sub-next').val(subtitles[0].value);
+      $('.next-start').val(subtitles[0].start);
+      $('.next-end').val(subtitles[0].start + subtitles[0].dur);
+      $('.sub-prev').val('');
+      $('.prev-start').val('');
+      $('.prev-end').val('');
+      return false;
+    }
     for (sub in subtitles) {
       timeStart = subtitles[sub].start;
       timeEnd = subtitles[sub].start + subtitles[sub].dur;
-      // if (player.getCurrentTime() < subtitles[0].start) {
-      //   currentSubIndex = sub;
-      //   editSub = subtitles[0];
-      //   nextSub = subtitles[1];
-      //   $('.sub-edit').val('');
-      //   $('.edit-start').val('');
-      //   $('.edit-end').val('');
-      //   $('.sub-next').val('');
-      //   $('.next-start').val('');
-      //   $('.next-end').val('');
-      //   $('.sub-prev').val('');
-      //   $('.prev-start').val('');
-      //   $('.prev-end').val('');
-      //   return false;
-      // }
 
       if (player.getCurrentTime() >= timeStart && player.getCurrentTime() <= timeEnd) {
         currentSubIndex = sub;

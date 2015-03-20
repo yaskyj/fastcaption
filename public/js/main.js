@@ -218,7 +218,7 @@ function addCaption() {
     startCaption = 
     {
       'start': player.getCurrentTime(),
-      'dur': 5.0,
+      'dur': 2.0,
       'value': 'Add caption text and change beginning and ending times',
       'extra_data': []
     };
@@ -243,7 +243,7 @@ function addCaption() {
     startCaption = 
     {
       'start': player.getCurrentTime(),
-      'dur': 5.0,
+      'dur': 2.0,
       'value': 'Add caption text and change beginning and ending times', 
       'extra_data': []
     };

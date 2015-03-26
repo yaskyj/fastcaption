@@ -96,6 +96,7 @@ exports.getVideo = function(req, res) {
                 '_id': craptionID,
                 'title': title,
                 'url': videoURL,
+                'transcript': '',
                 'captions': []
               });
               console.log(craptionObj);

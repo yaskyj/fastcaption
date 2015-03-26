@@ -288,7 +288,6 @@ function saveCaption() {
   $('.sub-edit').focusout();
   rewindVideo();
   player.playVideo();
-  // console.log(videoData);
   subtitleChangeInterval = setInterval(subtitleRefresh, 100);
 }
 
@@ -315,13 +314,19 @@ $(document).ready(function() {
       $('#player').show();
       $('#current-player-time').show();
       $('#overlay').show();
-      $('.sub-prev').show();
-      $('.sub-edit').show();
-      $('.sub-next').show();
       $('#subtitles').show();
-      $('.prev-head').show();
-      $('.edit-head').show();
-      $('.next-head').show();      
+      if (subtitles.length > 0) {
+        $('.sub-prev').show();
+        $('.sub-edit').show();
+        $('.sub-next').show();
+        $('.prev-head').show();
+        $('.edit-head').show();
+        $('.next-head').show();
+      }
+      else {
+        $('.trascription-area').show();
+      }
+      
       tag.src = "https://www.youtube.com/iframe_api";
       firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
     });

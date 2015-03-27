@@ -41,6 +41,7 @@ function onPlayerReady(event) {
   currentRate = player.getPlaybackRate();
   rateIndex = rates.indexOf(currentRate);
   subtitleChangeInterval = setInterval(subtitleRefresh, 100);
+  console.log(player.getDuration());
   $.getJSON('/video/youtube' + videoID, function(data) {
     videoData = data;
     subtitles = videoData.captions;
@@ -52,7 +53,7 @@ function onPlayerReady(event) {
     $('#current-player-time').show();
     $('#overlay').show();
     $('#subtitles').show();
-    if (subtitles.length > 0) {
+    if (subtitles.length > 0 && player.getDuration() < 240) {
       $('.sub-prev').show();
       $('.sub-edit').show();
       $('.sub-next').show();

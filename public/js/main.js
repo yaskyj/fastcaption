@@ -335,6 +335,20 @@ $(document).ready(function() {
     firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
   });
 
+  $(window).scroll(
+    {
+        previousTop: 0
+    }, 
+    function () {
+    var currentTop = $(window).scrollTop();
+    if (currentTop < this.previousTop) {
+        $(".navbar-fixed-top").fadeIn("slow");
+    } else {
+        $(".navbar-fixed-top").fadeOut("slow");
+    }
+    this.previousTop = currentTop;
+  });
+
   //Test Videos
   //https://www.youtube.com/watch?v=MftOONlDQac
   //https://www.youtube.com/watch?v=fPloDzu_wcI

@@ -18,7 +18,8 @@ var urlValue,
   editSub,
   videoData,
   currentSubIndex,
-  startCaption;
+  startCaption,
+  videoDuration;
 
 function onYouTubeIframeAPIReady() {
   player = new YT.Player('player', {
@@ -41,7 +42,32 @@ function onPlayerReady(event) {
   rateIndex = rates.indexOf(currentRate);
   event.target.playVideo();
   subtitleChangeInterval = setInterval(subtitleRefresh, 100);
-  
+  $.getJSON('/video/youtube' + videoID, function(data) {
+    videoData = data;
+    subtitles = videoData.captions;
+    $('.search-bar').hide();
+    $('.main-button').hide();
+    $('.shortcuts').fadeIn();
+    $('.video-main').show();
+    $('#player').show();
+    $('#current-player-time').show();
+    $('#overlay').show();
+    $('#subtitles').show();
+    if (subtitles.length > 0) {
+      $('.sub-prev').show();
+      $('.sub-edit').show();
+      $('.sub-next').show();
+      $('.prev-head').show();
+      $('.edit-head').show();
+      $('.next-head').show();
+    }
+    else {
+      $('.trascription-area').show();
+    }
+    
+    tag.src = "https://www.youtube.com/iframe_api";
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+  });  
   $('.sub-edit').focus(function() {
     player.pauseVideo();
   });
@@ -304,32 +330,6 @@ $(document).ready(function() {
     else {
       videoID = urlValue.trim();
     }
-    $.getJSON('/video/youtube' + videoID, function(data) {
-      videoData = data;
-      subtitles = videoData.captions;
-      $('.search-bar').hide();
-      $('.main-button').hide();
-      $('.shortcuts').fadeIn();
-      $('.video-main').show();
-      $('#player').show();
-      $('#current-player-time').show();
-      $('#overlay').show();
-      $('#subtitles').show();
-      if (subtitles.length > 0) {
-        $('.sub-prev').show();
-        $('.sub-edit').show();
-        $('.sub-next').show();
-        $('.prev-head').show();
-        $('.edit-head').show();
-        $('.next-head').show();
-      }
-      else {
-        $('.trascription-area').show();
-      }
-      
-      tag.src = "https://www.youtube.com/iframe_api";
-      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-    });
   });
 
   //Test Videos

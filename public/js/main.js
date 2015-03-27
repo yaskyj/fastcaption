@@ -40,7 +40,6 @@ function onPlayerReady(event) {
   rates = player.getAvailablePlaybackRates();
   currentRate = player.getPlaybackRate();
   rateIndex = rates.indexOf(currentRate);
-  event.target.playVideo();
   subtitleChangeInterval = setInterval(subtitleRefresh, 100);
   $.getJSON('/video/youtube' + videoID, function(data) {
     videoData = data;
@@ -60,14 +59,14 @@ function onPlayerReady(event) {
       $('.prev-head').show();
       $('.edit-head').show();
       $('.next-head').show();
+      event.target.playVideo();
     }
     else {
       $('.trascription-area').show();
+      event.target.playVideo();
     }
-    
-    tag.src = "https://www.youtube.com/iframe_api";
-    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-  });  
+  });
+
   $('.sub-edit').focus(function() {
     player.pauseVideo();
   });
@@ -330,6 +329,9 @@ $(document).ready(function() {
     else {
       videoID = urlValue.trim();
     }
+
+    tag.src = "https://www.youtube.com/iframe_api";
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
   });
 
   //Test Videos

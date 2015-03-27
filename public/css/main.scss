@@ -19,7 +19,7 @@ html {
 }
 
 body {
-  padding-top: 20px;
+  padding: 80px 20px 0px 20px;
   margin-bottom: 75px;
   -webkit-font-smoothing: antialiased;
 }
@@ -105,6 +105,9 @@ footer {
   margin: 0 auto;
 }
 
+#current-player-time {
+  display: none;
+}
 #subtitles h3 {
   display: inline;
   background-color: #000;
@@ -125,7 +128,7 @@ footer {
   margin-top: 0px;
 }
 
-.sub-prev, .sub-edit, .sub-next {
+.sub-prev, .sub-edit, .sub-next, .trascription-area {
   margin: 5px auto;
   display: none;
   padding: 2px 5px;

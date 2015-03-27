@@ -19,6 +19,9 @@ block content
             tr
               td CTRL + 3
               td Skip forward 5 seconds
+            tr
+              td CTRL + Shift + D
+              td Delete Current Caption
     .col-lg-6
       .shortcuts
         table.table.table-striped
@@ -36,7 +39,9 @@ block content
             tr
               td CTRL + Shift + S
               td Save Current Caption
-
+            tr
+              td CTRL + Shift + A
+              td Add New Caption
   .row.text-center.search-bar
     .col-lg-12.input-space
       input#link-value.input-lg.form-control.text-center(type="text", placeholder="Paste the Video's URL here", data-ng-model="videoUrl")
@@ -44,7 +49,6 @@ block content
   .row.text-center.main-button
     .lg-col-12
       input#the-button.btn.btn-primary(type="submit", value="Click to Get Video", data-ng-click="onSearch()")
-
   .row
     .col-lg-9
       .text-center.video-main
@@ -52,19 +56,40 @@ block content
         #overlay
         #subtitles
           h3
+      .text-left#current-player-time
+        h3 Current Player Time
+        #player-time
+    .col-lg-3
+      .text-left
+        .trascription-area
+          input#transcript-upload(type="file")
+          h5 Enter Transcription Text
+          textarea.input-lg.mousetrap.transciption-box(rows="20", cols="28")
     .col-lg-3
       .text-left
         .prev-head
           h5 Previous Subtitle
+          p
+            textarea.mousetrap.prev-start(rows="1", cols="5")
+            |&nbspto 
+            textarea.mousetrap.prev-end(rows="1", cols="5")
       .text-center
         textarea.input-lg.mousetrap.sub-prev(rows="5", cols="50", readonly="readonly")
       .text-left
         .edit-head
           h5 Current Subtitle
+          p
+            textarea.mousetrap.edit-start(rows="1", cols="5")
+            |&nbspto 
+            textarea.mousetrap.edit-end(rows="1", cols="5")
       .text-center
         textarea.input-lg.mousetrap.sub-edit(rows="5", cols="50")
       .text-left
         .next-head
           h5 Next Subtitle
+          p
+            textarea.mousetrap.next-start(rows="1", cols="5")
+            |&nbspto 
+            textarea.mousetrap.next-end(rows="1", cols="5")
       .text-center
         textarea.input-lg.mousetrap.sub-next(rows="5", cols="50", readonly="readonly")

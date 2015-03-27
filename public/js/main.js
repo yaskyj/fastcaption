@@ -288,22 +288,29 @@ function addCaption() {
 
 function saveCaption() {
   console.log(currentSubIndex);
-  videoData.captions[currentSubIndex].value = $('.sub-edit').val();
-  videoData.captions[currentSubIndex].start = parseFloat($('.edit-start').val());
-  videoData.captions[currentSubIndex].dur = parseFloat($('.edit-end').val()) - parseFloat($('.edit-start').val());
-  if (currentSubIndex > 0) {
-    videoData.captions[parseInt(currentSubIndex)-1].start = parseFloat($('.prev-start').val());
-    videoData.captions[parseInt(currentSubIndex)-1].dur = parseFloat($('.prev-end').val()) - parseFloat($('.prev-start').val());    
+  if (videoData.captions < 1) {
+    videoData.transcript = $('.transciption-box').val();
+    console.log(videoData.transcript);
   }
-  if (currentSubIndex < videoData.captions.length-1) {
-    videoData.captions[parseInt(currentSubIndex)+1].start = parseFloat($('.next-start').val());
-    videoData.captions[parseInt(currentSubIndex)+1].dur = parseFloat($('.next-end').val()) - parseFloat($('.next-start').val());    
+  else {
+    videoData.captions[currentSubIndex].value = $('.sub-edit').val();
+    videoData.captions[currentSubIndex].start = parseFloat($('.edit-start').val());
+    videoData.captions[currentSubIndex].dur = parseFloat($('.edit-end').val()) - parseFloat($('.edit-start').val());
+    if (currentSubIndex > 0) {
+      videoData.captions[parseInt(currentSubIndex)-1].start = parseFloat($('.prev-start').val());
+      videoData.captions[parseInt(currentSubIndex)-1].dur = parseFloat($('.prev-end').val()) - parseFloat($('.prev-start').val());    
+    }
+    if (currentSubIndex < videoData.captions.length-1) {
+      videoData.captions[parseInt(currentSubIndex)+1].start = parseFloat($('.next-start').val());
+      videoData.captions[parseInt(currentSubIndex)+1].dur = parseFloat($('.next-end').val()) - parseFloat($('.next-start').val());    
+    }
+    subtitles = videoData.captions;
+    if (!(videoData.captions[currentSubIndex].dur)) {
+      console.log("No duration")
+      return false;
+    }    
   }
-  subtitles = videoData.captions;
-  if (!(videoData.captions[currentSubIndex].dur)) {
-    console.log("No duration")
-    return false;
-  }
+
   $.ajax({
     url: '/video/' + videoID,
     type: 'POST',
@@ -311,10 +318,11 @@ function saveCaption() {
     contentType: 'application/json; charset=utf-8',
     dataType: 'json'
   });
-  $('.sub-edit').focusout();
-  rewindVideo();
-  player.playVideo();
-  subtitleChangeInterval = setInterval(subtitleRefresh, 100);
+  if (videoData.captions > 0) {
+    rewindVideo();
+    player.playVideo();
+    subtitleChangeInterval = setInterval(subtitleRefresh, 100);
+  }
 }
 
 $(document).ready(function() {

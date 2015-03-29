@@ -357,9 +357,14 @@ $(document).ready(function() {
     this.previousTop = currentTop;
   });
 
-  //Test Videos
-  //https://www.youtube.com/watch?v=MftOONlDQac
-  //https://www.youtube.com/watch?v=fPloDzu_wcI
-  //https://www.youtube.com/watch?v=poL7l-Uk3I8
-  //https://www.youtube.com/watch?v=hjfogiltO80
+  $( "#transcript-upload").change(function() {
+    console.log("photo file has been chosen")
+  });
+
 });
+
+//Test Videos
+//https://www.youtube.com/watch?v=MftOONlDQac
+//https://www.youtube.com/watch?v=fPloDzu_wcI
+//https://www.youtube.com/watch?v=poL7l-Uk3I8
+//https://www.youtube.com/watch?v=hjfogiltO80

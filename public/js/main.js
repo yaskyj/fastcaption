@@ -64,6 +64,7 @@ function onPlayerReady(event) {
     }
     else {
       $('.trascription-area').show();
+      $('.transcription-box').val(videoData.transcript);
       event.target.playVideo();
     }
   });
@@ -289,7 +290,7 @@ function addCaption() {
 function saveCaption() {
   console.log(currentSubIndex);
   if (videoData.captions < 1) {
-    videoData.transcript = $('.transciption-box').val();
+    videoData.transcript = $('.transcription-box').val();
     console.log(videoData.transcript);
   }
   else {

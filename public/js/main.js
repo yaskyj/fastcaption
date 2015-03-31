@@ -63,7 +63,7 @@ function onPlayerReady(event) {
       event.target.playVideo();
     }
     else {
-      $('.trascription-area').show();
+      $('.transcription-area').show();
       $('.transcription-box').val(videoData.transcript);
       event.target.playVideo();
     }

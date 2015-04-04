@@ -121,7 +121,7 @@ Mousetrap.bind('ctrl+shift+d', deleteCaption);
 
 function subtitleRefresh() {
   console.log(player.getCurrentTime());
-  $('#player-time').text(player.getCurrentTime());
+  $('#player-time').text(parseFloat(player.getCurrentTime()).toFixed(2));
 
   if (player.getPlayerState() === 1) {
     if (player.getCurrentTime() > (subtitles[subtitles.length-1].start + subtitles[subtitles.length-1].dur)) {

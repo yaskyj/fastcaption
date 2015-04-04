@@ -139,9 +139,6 @@ function subtitleRefresh() {
     }
 
     if (player.getCurrentTime() < subtitles[0].start) {
-      currentSubIndex = sub;
-      editSub = subtitles[0];
-      nextSub = subtitles[1];
       $('.sub-edit').val('');
       $('.edit-start').val('');
       $('.edit-end').val('');
@@ -189,7 +186,7 @@ function subtitleRefresh() {
           $('.prev-end').val('');
           return false;
         }
-        else if (!prevSub) {
+        else if (!prevSub && nextSub) {
           $('#subtitles h3').text(editSub.value);
           $('.sub-edit').val(editSub.value);
           $('.edit-start').val(editSub.start);
@@ -266,7 +263,7 @@ function addCaption() {
     $('.prev-end').val(prevSub.start + prevSub.dur);
   }
   else {
-    currentSubIndex = 0;
+    currentSubIndex = videoData.captions.length >= 1 ? videoData.captions[videoData.captions.length] : 0;
     startCaption = 
     {
       'start': player.getCurrentTime(),
@@ -289,28 +286,28 @@ function addCaption() {
 
 function saveCaption() {
   console.log(currentSubIndex);
-  if (videoData.captions < 1) {
-    videoData.transcript = $('.transcription-box').val();
-    console.log(videoData.transcript);
+  // if (videoData.captions < 1) {
+  //   videoData.transcript = $('.transcription-box').val();
+  //   console.log(videoData.transcript);
+  // }
+  // else {
+  videoData.captions[currentSubIndex].value = $('.sub-edit').val();
+  videoData.captions[currentSubIndex].start = parseFloat($('.edit-start').val());
+  videoData.captions[currentSubIndex].dur = parseFloat($('.edit-end').val()) - parseFloat($('.edit-start').val());
+  if (currentSubIndex > 0) {
+    videoData.captions[parseInt(currentSubIndex)-1].start = parseFloat($('.prev-start').val());
+    videoData.captions[parseInt(currentSubIndex)-1].dur = parseFloat($('.prev-end').val()) - parseFloat($('.prev-start').val());    
   }
-  else {
-    videoData.captions[currentSubIndex].value = $('.sub-edit').val();
-    videoData.captions[currentSubIndex].start = parseFloat($('.edit-start').val());
-    videoData.captions[currentSubIndex].dur = parseFloat($('.edit-end').val()) - parseFloat($('.edit-start').val());
-    if (currentSubIndex > 0) {
-      videoData.captions[parseInt(currentSubIndex)-1].start = parseFloat($('.prev-start').val());
-      videoData.captions[parseInt(currentSubIndex)-1].dur = parseFloat($('.prev-end').val()) - parseFloat($('.prev-start').val());    
-    }
-    if (currentSubIndex < videoData.captions.length-1) {
-      videoData.captions[parseInt(currentSubIndex)+1].start = parseFloat($('.next-start').val());
-      videoData.captions[parseInt(currentSubIndex)+1].dur = parseFloat($('.next-end').val()) - parseFloat($('.next-start').val());    
-    }
-    subtitles = videoData.captions;
-    if (!(videoData.captions[currentSubIndex].dur)) {
-      console.log("No duration")
-      return false;
-    }    
+  if (currentSubIndex < videoData.captions.length-1) {
+    videoData.captions[parseInt(currentSubIndex)+1].start = parseFloat($('.next-start').val());
+    videoData.captions[parseInt(currentSubIndex)+1].dur = parseFloat($('.next-end').val()) - parseFloat($('.next-start').val());    
   }
+  subtitles = videoData.captions;
+  if (!(videoData.captions[currentSubIndex].dur)) {
+    console.log("No duration")
+    return false;
+  }    
+  // }
 
   $.ajax({
     url: '/video/' + videoID,

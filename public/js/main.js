@@ -302,10 +302,6 @@ function saveCaption() {
     videoData.captions[parseInt(currentSubIndex)+1].dur = parseFloat($('.next-end').val()) - parseFloat($('.next-start').val());    
   }
   subtitles = videoData.captions;
-  if (!(videoData.captions[currentSubIndex].dur)) {
-    console.log("No duration")
-    return false;
-  }    
   // }
 
   $.ajax({
@@ -315,11 +311,10 @@ function saveCaption() {
     contentType: 'application/json; charset=utf-8',
     dataType: 'json'
   });
-  if (videoData.captions > 0) {
-    rewindVideo();
-    player.playVideo();
-    subtitleChangeInterval = setInterval(subtitleRefresh, 100);
-  }
+  // if (videoData.captions > 0) {
+  rewindVideo();
+  player.playVideo();
+  // }
 }
 
 $(document).ready(function() {

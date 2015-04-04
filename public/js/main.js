@@ -53,20 +53,20 @@ function onPlayerReady(event) {
     $('#current-player-time').show();
     $('#overlay').show();
     $('#subtitles').show();
-    if (subtitles.length > 0) {
-      $('.sub-prev').show();
-      $('.sub-edit').show();
-      $('.sub-next').show();
-      $('.prev-head').show();
-      $('.edit-head').show();
-      $('.next-head').show();
-      event.target.playVideo();
-    }
-    else {
-      $('.transcription-area').show();
-      $('.transcription-box').val(videoData.transcript);
-      event.target.playVideo();
-    }
+    // if (subtitles.length > 0) {
+    $('.sub-prev').show();
+    $('.sub-edit').show();
+    $('.sub-next').show();
+    $('.prev-head').show();
+    $('.edit-head').show();
+    $('.next-head').show();
+    event.target.playVideo();
+    // }
+    // else {
+    //   $('.transcription-area').show();
+    //   $('.transcription-box').val(videoData.transcript);
+    //   event.target.playVideo();
+    // }
   });
 
   $('.sub-edit').focus(function() {

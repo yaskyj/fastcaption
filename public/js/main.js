@@ -236,7 +236,10 @@ function deleteCaption() {
 
 function addCaption() {
   console.log(videoData);
-  pauseVideo();
+  if (player.getPlayerState() === 1) {
+    pauseVideo();
+  }
+  
   if (currentSubIndex) {
     startCaption = 
     {

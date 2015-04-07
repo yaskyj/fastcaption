@@ -235,11 +235,9 @@ function deleteCaption() {
 }
 
 function addCaption() {
-  console.log(videoData);
   if (player.getPlayerState() === 1) {
     pauseVideo();
   }
-  
   if (currentSubIndex) {
     startCaption = 
     {
@@ -248,7 +246,9 @@ function addCaption() {
       'value': 'Add caption text and change beginning and ending times',
       'extra_data': []
     };
-    videoData.captions.splice(currentSubIndex, 0, startCaption);
+    console.log(typeof currentSubIndex);
+    videoData.captions.splice(parseInt(currentSubIndex) + 1, 0, startCaption);
+    currentSubIndex = parseInt(currentSubIndex) + 1;
     subtitles = videoData.captions;
     editSub = subtitles[currentSubIndex];
     prevSub = subtitles[parseInt(currentSubIndex)-1];

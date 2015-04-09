@@ -4,7 +4,6 @@ var captionSchema = new mongoose.Schema({
   _id: { type: String, unique: true},
   title: String,
   url: String,
-  transcript: String,
   captions: [{
       start: Number,
       dur: Number,

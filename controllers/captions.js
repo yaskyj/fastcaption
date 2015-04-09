@@ -27,7 +27,6 @@ exports.getCaptions = function(req, res) {
 exports.saveVideo = function(req, res) {
   Captions.findByIdAndUpdate(req.body['_id'], req.body, function(err, caption) {
     if (err) {console.log(err)};
-    console.log(caption.transcript);
     if (caption) {console.log(caption.title)};
   });
 };
@@ -96,7 +95,6 @@ exports.getVideo = function(req, res) {
                 '_id': craptionID,
                 'title': title,
                 'url': videoURL,
-                'transcript': '',
                 'captions': []
               });
               console.log(craptionObj);

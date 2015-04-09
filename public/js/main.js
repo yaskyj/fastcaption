@@ -246,7 +246,6 @@ function addCaption() {
       'value': 'Add caption text and change beginning and ending times',
       'extra_data': []
     };
-    console.log(typeof currentSubIndex);
     videoData.captions.splice(parseInt(currentSubIndex) + 1, 0, startCaption);
     currentSubIndex = parseInt(currentSubIndex) + 1;
     subtitles = videoData.captions;

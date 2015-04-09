@@ -320,7 +320,10 @@ function saveCaption() {
 }
 
 $(document).ready(function() {
-
+  $(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+  })
+  
   $('#the-button').click(function() {
     urlValue = $('#link-value').val();
     tag = document.createElement('script');
@@ -354,7 +357,6 @@ $(document).ready(function() {
   $( "#transcript-upload").change(function() {
     console.log("photo file has been chosen")
   });
-
 });
 
 //Test Videos

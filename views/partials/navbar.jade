@@ -9,10 +9,24 @@
       //- a.navbar-brand(href='/')
       //-   span.ion-cube
       //-    Project name
+      #aboutModal.modal.fade(tabindex="-1", role="dialog", aria-labelledby="aboutModalLabel", aria-hidden="true")
+          .modal-dialog
+            .modal-content
+              .modal-header
+                .close(type="button", data-dismiss="modal", aria-label="Close")
+                  span(aria-hidden="true") &times
+              .modal-title
+                h4 Modal title
+              .modal-body
+                p One fine body&hellip;
+              .modal-footer
+                .btn.btn-default(type="button", data-dismiss="modal") Close
     .collapse.navbar-collapse
       ul.nav.navbar-nav
         li(class=title=='Home'?'active':undefined)
           a(href='/') Home
+        li(class=title=='About'?'active':undefined)
+          a(href='#', data-toggle="modal" data-target="#aboutModal") About
         //- li(class=title=='API Examples'?'active':undefined)
         //-   a(href='/api/stripe') Donate
         //- li(class=title=='Contact'?'active':undefined)

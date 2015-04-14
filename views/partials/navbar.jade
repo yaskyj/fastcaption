@@ -9,18 +9,18 @@
       //- a.navbar-brand(href='/')
       //-   span.ion-cube
       //-    Project name
-      #aboutModal.modal.fade(tabindex="-1", role="dialog", aria-labelledby="aboutModalLabel", aria-hidden="true")
-          .modal-dialog
-            .modal-content
-              .modal-header
-                .close(type="button", data-dismiss="modal", aria-label="Close")
-                  span(aria-hidden="true") &times
-              .modal-title
-                h4 About
-              .modal-body
-                p This is something about
-              .modal-footer
-                .btn.btn-default(type="button", data-dismiss="modal") Close
+      //- #aboutModal.modal.fade(tabindex="-1", role="dialog", aria-labelledby="aboutModalLabel", aria-hidden="true")
+      //-     .modal-dialog
+      //-       .modal-content
+      //-         .modal-header
+      //-           .close(type="button", data-dismiss="modal", aria-label="Close")
+      //-             span(aria-hidden="true") &times
+      //-         .modal-title
+      //-           h4 About
+      //-         .modal-body
+      //-           p This is something about
+      //-         .modal-footer
+      //-           .btn.btn-default(type="button", data-dismiss="modal") Close
       #instructionsModal.modal.fade(tabindex="-1", role="dialog", aria-labelledby="instructionsModalLabel", aria-hidden="true")
           .modal-dialog
             .modal-content
@@ -37,8 +37,8 @@
       ul.nav.navbar-nav
         li(class=title=='Home'?'active':undefined)
           a(href='/') Home
-        li(class=title=='About'?'active':undefined)
-          a(href='#', data-toggle="modal" data-target="#aboutModal") About
+        //- li(class=title=='About'?'active':undefined)
+        //-   a(href='#', data-toggle="modal" data-target="#aboutModal") About
         li(class=title=='How It Works'?'active':undefined)
           a(href='#', data-toggle="modal" data-target="#instructionsModal") How It Works
         //- li(class=title=='API Examples'?'active':undefined)

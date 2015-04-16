@@ -1,3 +1,4 @@
+//Initial variable declarations
 var currentRate,
     currentSubIndex,
     editSub,
@@ -20,6 +21,7 @@ var currentRate,
     videoDuration,
     videoID = '';
 
+//Standard YouTube player creation on ready
 function onYouTubeIframeAPIReady() {
   player = new YT.Player('player', {
     height: '340',
@@ -35,6 +37,7 @@ function onYouTubeIframeAPIReady() {
   });
 }
 
+//Call once Player ready
 function onPlayerReady(event) {
   rates = player.getAvailablePlaybackRates();
   currentRate = player.getPlaybackRate();

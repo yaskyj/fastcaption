@@ -323,7 +323,12 @@ $(document).ready(function() {
   $(function () {
     $('[data-toggle="tooltip"]').tooltip()
   })
-  
+  document.getElementById('link-value').addEventListener('keypress', function(event) {
+          if (event.keyCode == 13) {
+            document.getElementById('the-button').click();
+          }
+  });
+
   $('#the-button').click(function() {
     urlValue = $('#link-value').val();
     tag = document.createElement('script');

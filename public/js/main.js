@@ -182,6 +182,7 @@ function subtitleRefresh() {
       $('.sub-prev').val('');
       $('.prev-start').val('');
       $('.prev-end').val('');
+      $('#subtitles h3').text('');
       return false;
     }
     for (sub in subtitles) {

@@ -80,7 +80,6 @@ function pauseVideo() {
   else {
     player.playVideo();
   }
-  return false
 }
 
 function slowdownVideo() {
@@ -88,7 +87,6 @@ function slowdownVideo() {
     player.setPlaybackRate(rates[rateIndex-1]);
     rateIndex -= 1;
   }
-  return false
 }
 
 function speedupVideo() {
@@ -96,32 +94,61 @@ function speedupVideo() {
     player.setPlaybackRate(rates[rateIndex+1]);
     rateIndex += 1;
   }
-  return false
 }
 
 function rewindVideo() {
   player.seekTo((player.getCurrentTime()-2), true);
   player.playVideo();
   console.log(player.getCurrentTime());
-  return false
 }
 
 function forwardVideo() {
   player.seekTo((player.getCurrentTime()+2), true);
   player.playVideo();
   console.log(player.getCurrentTime());
-  return false
 }
 
-Mousetrap.bind('ctrl+1', pauseVideo);
-Mousetrap.bind('ctrl+4', slowdownVideo);
-Mousetrap.bind('ctrl+5', speedupVideo);
-Mousetrap.bind('ctrl+2', rewindVideo);
-Mousetrap.bind('ctrl+3', forwardVideo);
-Mousetrap.bind('ctrl+shift+s', saveCaption);
-Mousetrap.bind('ctrl+shift+a', addCaption);
-Mousetrap.bind('ctrl+shift+d', deleteCaption);
+// Mousetrap.bind('ctrl+1', pauseVideo);
+Mousetrap.bind('ctrl+1', function(e) {
+  pauseVideo();
+  return false;
+});
 
+// Mousetrap.bind('ctrl+4', slowdownVideo);
+Mousetrap.bind('ctrl+4', function(e) {
+  slowdownVideo();
+  return false;
+});
+// Mousetrap.bind('ctrl+5', speedupVideo);
+Mousetrap.bind('ctrl+5', function(e) {
+  speedupVideo();
+  return false;
+});
+// Mousetrap.bind('ctrl+2', rewindVideo);
+Mousetrap.bind('ctrl+2', function(e) {
+  rewindVideo();
+  return false;
+});
+// Mousetrap.bind('ctrl+3', forwardVideo);
+Mousetrap.bind('ctrl+3', function(e) {
+  forwardVideo();
+  return false;
+});
+// Mousetrap.bind('ctrl+shift+s', saveCaption);
+Mousetrap.bind('ctrl+shift+s', function(e) {
+  saveCaption();
+  return false;
+});
+// Mousetrap.bind('ctrl+shift+a', addCaption);
+Mousetrap.bind('ctrl+shift+a', function(e) {
+  addCaption();
+  return false;
+});
+// Mousetrap.bind('ctrl+shift+d', deleteCaption);
+Mousetrap.bind('ctrl+shift+d', function(e) {
+  deleteCaption();
+  return false;
+});
 
 function subtitleRefresh() {
   console.log(player.getCurrentTime());
@@ -237,7 +264,6 @@ function deleteCaption() {
   $('.edit-end').val('');
   rewindVideo();
   player.playVideo();
-  return false
 }
 
 function addCaption() {
@@ -289,7 +315,6 @@ function addCaption() {
     $('.edit-start').val(editSub.start);
     $('.edit-end').val(editSub.start + editSub.dur);
   }
-  return false
 }
 
 function saveCaption() {
@@ -324,7 +349,6 @@ function saveCaption() {
   rewindVideo();
   player.playVideo();
   // }
-  return false
 }
 
 $(document).ready(function() {

@@ -55,7 +55,6 @@ function onPlayerReady(event) {
     $('#current-player-time').show();
     $('#overlay').show();
     $('#subtitles').show();
-    // if (subtitles.length > 0) {
     $('.sub-prev').show();
     $('.sub-edit').show();
     $('.sub-next').show();
@@ -63,12 +62,6 @@ function onPlayerReady(event) {
     $('.edit-head').show();
     $('.next-head').show();
     event.target.playVideo();
-    // }
-    // else {
-    //   $('.transcription-area').show();
-    //   $('.transcription-box').val(videoData.transcript);
-    //   event.target.playVideo();
-    // }
   });
 
   $('.sub-edit').focus(function() {
@@ -323,11 +316,6 @@ function addCaption() {
 
 function saveCaption() {
   console.log(currentSubIndex);
-  // if (videoData.captions < 1) {
-  //   videoData.transcript = $('.transcription-box').val();
-  //   console.log(videoData.transcript);
-  // }
-  // else {
   videoData.captions[currentSubIndex].value = $('.sub-edit').val();
   videoData.captions[currentSubIndex].start = parseFloat($('.edit-start').val());
   videoData.captions[currentSubIndex].dur = parseFloat($('.edit-end').val()) - parseFloat($('.edit-start').val());
@@ -340,7 +328,6 @@ function saveCaption() {
     videoData.captions[parseInt(currentSubIndex)+1].dur = parseFloat($('.next-end').val()) - parseFloat($('.next-start').val());    
   }
   subtitles = videoData.captions;
-  // }
 
   $.ajax({
     url: '/video/' + videoID,
@@ -349,10 +336,8 @@ function saveCaption() {
     contentType: 'application/json; charset=utf-8',
     dataType: 'json'
   });
-  // if (videoData.captions > 0) {
   rewindVideo();
   player.playVideo();
-  // }
 }
 
 $(document).ready(function() {

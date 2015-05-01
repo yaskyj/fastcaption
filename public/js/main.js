@@ -80,6 +80,7 @@ function pauseVideo() {
   else {
     player.playVideo();
   }
+  return false
 }
 
 function slowdownVideo() {
@@ -87,6 +88,7 @@ function slowdownVideo() {
     player.setPlaybackRate(rates[rateIndex-1]);
     rateIndex -= 1;
   }
+  return false
 }
 
 function speedupVideo() {
@@ -94,18 +96,21 @@ function speedupVideo() {
     player.setPlaybackRate(rates[rateIndex+1]);
     rateIndex += 1;
   }
+  return false
 }
 
 function rewindVideo() {
   player.seekTo((player.getCurrentTime()-2), true);
   player.playVideo();
   console.log(player.getCurrentTime());
+  return false
 }
 
 function forwardVideo() {
   player.seekTo((player.getCurrentTime()+2), true);
   player.playVideo();
   console.log(player.getCurrentTime());
+  return false
 }
 
 Mousetrap.bind('ctrl+1', pauseVideo);
@@ -232,6 +237,7 @@ function deleteCaption() {
   $('.edit-end').val('');
   rewindVideo();
   player.playVideo();
+  return false
 }
 
 function addCaption() {
@@ -283,6 +289,7 @@ function addCaption() {
     $('.edit-start').val(editSub.start);
     $('.edit-end').val(editSub.start + editSub.dur);
   }
+  return false
 }
 
 function saveCaption() {
@@ -317,6 +324,7 @@ function saveCaption() {
   rewindVideo();
   player.playVideo();
   // }
+  return false
 }
 
 $(document).ready(function() {

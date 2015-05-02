@@ -384,7 +384,6 @@ $(document).ready(function() {
     console.log("photo file has been chosen")
   });
 });
-
 //Test Videos
 //https://www.youtube.com/watch?v=MftOONlDQac
 //https://www.youtube.com/watch?v=fPloDzu_wcI

@@ -1,7 +1,7 @@
-NoMoreCraptions
+FastCaptions
 ===============
 
-NoMoreCraptions is a project to make editing/creating captions for YouTube videos easier and hopefulle, more collaborative.
+FastCaptions is a project to make editing/creating captions for YouTube videos easier and hopefully, more collaborative.
 
 Prerequisites
 -------------

@@ -72,9 +72,9 @@ app.use(session({
   saveUninitialized: true,
   secret: secrets.sessionSecret,
   store: new MongoStore({
-    mongooseConnection: mongoose.connection
-    //url: secrets.db,
-    //autoReconnect: true
+    mongooseConnection: mongoose.connection,
+    url: secrets.db,
+    autoReconnect: true
   })
 }));
 app.use(passport.initialize());
